@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -33,6 +34,9 @@ android {
 }
 
 dependencies {
+
+    implementation(platform(libs.koin.bom))
+    implementation(libs.bundles.koin)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -1,3 +1,5 @@
+import java.net.URI
+
 pluginManagement {
     repositories {
         google {
@@ -16,6 +18,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            name = "TarsosDSP repository"
+            url = URI.create("https://mvn.0110.be/releases")
+        }
     }
 }
 

@@ -45,6 +45,11 @@ dependencies {
     implementation(project(":core-util"))
     implementation(project(":core-theme"))
 
+    implementation(project(":feature-tuner"))
+
+    implementation(platform(libs.koin.bom))
+    implementation(libs.bundles.koin)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
