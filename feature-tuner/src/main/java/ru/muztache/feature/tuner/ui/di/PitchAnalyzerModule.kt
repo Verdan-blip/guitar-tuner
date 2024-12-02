@@ -1,9 +1,9 @@
 package ru.muztache.feature.tuner.ui.di
 
 import org.koin.dsl.module
-import ru.muztache.feature.tuner.ui.engine.analyzer.PitchAnalyzer
-import ru.muztache.feature.tuner.ui.engine.analyzer.PitchAnalyzerImpl
+import ru.muztache.feature.tuner.ui.engine.analyzer.FrequencyAnalyzer
+import ru.muztache.feature.tuner.ui.engine.analyzer.FrequencyAnalyzerImpl
 
-val pitchAnalyzerModule = module {
-    single<PitchAnalyzer> { PitchAnalyzerImpl() }
+val frequencyAnalyzerModule = module {
+    single<FrequencyAnalyzer> { FrequencyAnalyzerImpl() }
 }

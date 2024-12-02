@@ -3,7 +3,7 @@ package ru.muztache.feature.tuner.ui.engine.processor.pitch
 import kotlinx.coroutines.flow.SharedFlow
 import ru.muztache.feature.tuner.ui.engine.processor.Processor
 
-interface PitchProcessor : Processor {
+interface FrequencyProcessor : Processor {
 
-    val pitch: SharedFlow<Float>
+    val frequency: SharedFlow<Float>
 }

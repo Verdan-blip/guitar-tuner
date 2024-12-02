@@ -7,8 +7,8 @@ import ru.muztache.feature.tuner.ui.TunerViewModel
 val featureTunerModule = module {
     includes(
         audioProcessorModule,
-        pitchProcessorModule,
-        pitchAnalyzerModule
+        frequencyProcessorModule,
+        frequencyAnalyzerModule
     )
     viewModelOf(::TunerViewModel)
 }

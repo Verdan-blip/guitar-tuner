@@ -1,18 +1,22 @@
 package ru.muztache.feature.tuner.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,10 +24,16 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import org.koin.androidx.compose.koinViewModel
-import ru.muztache.feature.tuner.ui.composable.NoteIndicator
-import ru.muztache.feature.tuner.ui.composable.StringIndicator
+import ru.muztache.feature.tuner.ui.composable.headstock.GuitarHeadstock
+import ru.muztache.feature.tuner.ui.composable.headstock.rememberHeadstockState
+import ru.muztache.feature.tuner.ui.composable.indicator.ProgressIndicatorLayout
+import ru.muztache.feature.tuner.ui.composable.indicator.rememberProgressIndicatorState
 import ru.muztache.feature.tuner.ui.engine.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.impl.guitar.Guitar
+import ru.muztache.feature.tuner.ui.entity.math.Deviation
+import ru.muztache.feature.tuner.ui.entity.math.toFraction
+import ru.muztache.feature.tuner.ui.entity.math.toPercents
+import ru.muztache.feature.tuner.ui.mvi.TunerAction
 import ru.muztache.feature.tuner.ui.mvi.TunerEvent
 import ru.muztache.feature.tuner.ui.mvi.TunerState
 
@@ -31,23 +41,23 @@ import ru.muztache.feature.tuner.ui.mvi.TunerState
 fun TunerScreen(modifier: Modifier = Modifier) {
 
     val viewModel = koinViewModel<TunerViewModel>()
+
     val state = viewModel.state.collectAsState()
-    val onEvent: (event: TunerEvent) -> Unit = { event ->
-        viewModel.reducer(event)
-    }
+    val action = viewModel.action.collectAsState(null)
 
     TunerScreenContent(
         state = state.value,
         modifier = modifier,
-        onEvent = onEvent
+        onEvent = { event -> viewModel.reducer(event) },
+        action = action.value
     )
 
     val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
+    DisposableEffect(LocalLifecycleOwner.current) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
-                Lifecycle.Event.ON_START -> viewModel.onScreenVisible()
-                Lifecycle.Event.ON_STOP -> viewModel.onScreenInvisible()
+                Lifecycle.Event.ON_RESUME -> viewModel.onScreenVisible()
+                Lifecycle.Event.ON_PAUSE -> viewModel.onScreenInvisible()
                 else -> Unit
             }
         }
@@ -60,50 +70,111 @@ fun TunerScreen(modifier: Modifier = Modifier) {
 private fun TunerScreenContent(
     modifier: Modifier = Modifier,
     state: TunerState,
-    onEvent: (TunerEvent) -> Unit
+    onEvent: (TunerEvent) -> Unit,
+    action: TunerAction? = null
 ) {
-    Box(
-        modifier = modifier
-    ) {
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-        ) {
-            NoteIndicator(
-                radius = 128.dp,
-                note = state.idolNote,
-                isCorrect = state.isCorrect,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-            )
-            Text(
-                text = "${state.currentDiff}",
-                fontSize = 24.sp,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .align(Alignment.CenterHorizontally)
+    val tuningIndicatorState = rememberProgressIndicatorState()
+
+    when (action) {
+        is TunerAction.OnNewDeviation -> {
+            tuningIndicatorState.changeDeviationAnimation(
+                action.deviation.value
+                    .toPercents()
+                    .toFraction()
             )
         }
-        Row(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 32.dp)
+        else -> Unit
+    }
+
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .then(modifier)
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            repeat(state.selectedInstrument.stringCount) { index ->
-                StringIndicator(
-                    modifier = Modifier,
-                    radius = 24.dp,
-                    tailLength = 48.dp,
-                    note = state.selectedInstrument.getTone(index),
-                    isSelected = index == state.selectedString,
-                    onClick = { onEvent(TunerEvent.StringSelect(index)) }
-                )
-                Spacer(
+            Box(
+                modifier = Modifier
+                    .padding(top = 32.dp)
+            ) {
+                ProgressIndicatorLayout(
+                    state = tuningIndicatorState,
                     modifier = Modifier
-                        .width(8.dp)
+                        .align(Alignment.Center)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp, 48.dp)
+                            .background(
+                                color = if (state.isTuned)
+                                    Color.Green
+                                else
+                                    Color.Red.copy(alpha = 0.5f),
+                                shape = CircleShape
+                            )
+                    ) {
+                        Text(
+                            text = "%.1f".format(
+                                tuningIndicatorState.progress.value
+                            ),
+                            color = Color.White,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                        )
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(64.dp, 64.dp)
+                        .border(
+                            color = if (state.isTuned)
+                                Color.Green
+                            else
+                                Color.Red.copy(alpha = 0.5f),
+                            shape = CircleShape,
+                            width = 4.dp
+                        )
+                )
+            }
+            Text(
+                text = "%.1f of %.1f Hz".format(
+                    state.currentFrequency,
+                    state.idolNote.frequency
+                ),
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .padding(top = 24.dp)
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(top = 8.dp)
+            ) {
+                Text(
+                    text = "Auto detect",
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                )
+                Switch(
+                    checked = state.isAutoDetect,
+                    onCheckedChange = {
+                        onEvent(TunerEvent.AutoDetectSwitch)
+                    }
                 )
             }
         }
+        GuitarHeadstock(
+            modifier = Modifier
+                .align(Alignment.Center),
+            tuning = state.selectedInstrument.tuning,
+            headstockState = rememberHeadstockState(),
+            onStringSelect = { stringNum ->
+                onEvent(TunerEvent.StringSelect(stringNum))
+            }
+        )
     }
 }
 
@@ -112,14 +183,16 @@ private fun TunerScreenContent(
 private fun TunerScreenContentPreview() {
     TunerScreenContent(
         state = TunerState(
-            isCorrect = false,
+            isTuned = false,
+            isAutoDetect = false,
             isEnabled = false,
             selectedInstrument = Guitar(),
             idolNote = Tone.B4,
-            currentDiff = 0f,
+            currentFrequency = 0f,
             selectedString = 0
         ),
         onEvent = { },
+        action = TunerAction.OnNewDeviation(deviation = Deviation(0f)),
         modifier = Modifier
             .fillMaxSize()
     )

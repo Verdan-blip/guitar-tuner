@@ -7,11 +7,12 @@ import ru.muztache.feature.tuner.ui.entity.instrument.StringInstrument
 
 data class TunerState(
     val isEnabled: Boolean,
+    val isAutoDetect: Boolean,
     val selectedInstrument: StringInstrument,
     val idolNote: Tone,
-    val currentDiff: Float,
+    val currentFrequency: Float,
     val selectedString: Int,
-    val isCorrect: Boolean
+    val isTuned: Boolean
 ) : BaseState {
 
     companion object {
@@ -21,11 +22,12 @@ data class TunerState(
             val currentString = 0
             return TunerState(
                 isEnabled = false,
+                isAutoDetect = false,
                 selectedInstrument = instrument,
                 idolNote = instrument.getTone(currentString),
                 selectedString = currentString,
-                currentDiff = 0f,
-                isCorrect = false
+                currentFrequency = 0f,
+                isTuned = false
             )
         }
     }

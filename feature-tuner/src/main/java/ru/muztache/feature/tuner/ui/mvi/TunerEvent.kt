@@ -5,4 +5,6 @@ import ru.muztache.core.common.base.BaseEvent
 sealed interface TunerEvent : BaseEvent {
 
     data class StringSelect(val stringNumber: Int) : TunerEvent
+
+    data object AutoDetectSwitch : TunerEvent
 }

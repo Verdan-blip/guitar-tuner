@@ -1,9 +1,9 @@
 package ru.muztache.feature.tuner.ui.di
 
 import org.koin.dsl.module
-import ru.muztache.feature.tuner.ui.engine.processor.pitch.PitchProcessor
-import ru.muztache.feature.tuner.ui.engine.processor.pitch.PitchProcessorImpl
+import ru.muztache.feature.tuner.ui.engine.processor.pitch.FrequencyProcessor
+import ru.muztache.feature.tuner.ui.engine.processor.pitch.FrequencyProcessorImpl
 
-internal val pitchProcessorModule = module {
-    single<PitchProcessor> { PitchProcessorImpl(get(), get()) }
+internal val frequencyProcessorModule = module {
+    single<FrequencyProcessor> { FrequencyProcessorImpl(get(), get()) }
 }

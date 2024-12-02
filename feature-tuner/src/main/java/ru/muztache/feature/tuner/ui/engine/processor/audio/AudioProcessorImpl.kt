@@ -17,12 +17,12 @@ class AudioProcessorImpl(
     private val applicationScope: CoroutineScope
 ) : AudioProcessor() {
 
-    private val _currentPitch = MutableSharedFlow<AudioProcessedData>()
-    override val currentPitch: SharedFlow<AudioProcessedData> get() = _currentPitch
+    private val _frequency = MutableSharedFlow<AudioProcessedData>()
+    override val frequency: SharedFlow<AudioProcessedData> get() = _frequency
 
     private val pitchDetectionHandler = PitchDetectionHandler { result, event ->
         applicationScope.launch(Dispatchers.Default) {
-            _currentPitch.emit(AudioProcessedData(
+            _frequency.emit(AudioProcessedData(
                 pitch = result.pitch,
                 isPitched = result.isPitched,
                 isSilence = event.isSilence(AudioProcessingConfig.SILENCE_THRESHOLD),

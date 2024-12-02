@@ -5,5 +5,5 @@ import ru.muztache.feature.tuner.ui.engine.processor.Processor
 
 abstract class AudioProcessor : Processor {
 
-    abstract val currentPitch: SharedFlow<AudioProcessedData>
+    abstract val frequency: SharedFlow<AudioProcessedData>
 }

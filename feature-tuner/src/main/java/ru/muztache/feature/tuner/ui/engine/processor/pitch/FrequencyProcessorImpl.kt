@@ -11,13 +11,13 @@ import ru.muztache.core.common.flow.bufferByTime
 import ru.muztache.feature.tuner.ui.engine.processor.audio.AudioProcessor
 import kotlin.time.Duration.Companion.milliseconds
 
-class PitchProcessorImpl(
+class FrequencyProcessorImpl(
     private val audioProcessor: AudioProcessor,
     applicationScope: CoroutineScope
-) : PitchProcessor {
+) : FrequencyProcessor {
 
     private val _pitch = MutableSharedFlow<Float>()
-    override val pitch: SharedFlow<Float> get() = _pitch
+    override val frequency: SharedFlow<Float> get() = _pitch
 
     init {
         applicationScope.launch(Dispatchers.Default) { collectPitches() }
@@ -32,7 +32,7 @@ class PitchProcessorImpl(
     }
 
     private suspend fun collectPitches() {
-        audioProcessor.currentPitch
+        audioProcessor.frequency
             .filter { it.pitch > 1f }
             .filter { it.isSilence.not() }
             .bufferByTime(250.milliseconds)
