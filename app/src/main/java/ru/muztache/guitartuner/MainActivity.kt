@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.feature.tuner.ui.TunerScreen
-import ru.muztache.guitartuner.ui.theme.GuitarTunerTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -23,10 +23,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
 
-        permissionLauncher.launch(android.Manifest.permission.RECORD_AUDIO)
+        permissionLauncher.launch(
+            android.Manifest.permission.RECORD_AUDIO
+        )
 
         setContent {
-            GuitarTunerTheme {
+            MuztacheTheme {
                 MainActivityContent(
                     modifier = Modifier
                         .fillMaxSize()
@@ -46,7 +48,7 @@ private fun MainActivityContent(
 @Preview(showSystemUi = true)
 @Composable
 fun MainActivityContentPreview() {
-    GuitarTunerTheme {
+    MuztacheTheme {
         MainActivityContent(
             modifier = Modifier
                 .fillMaxSize()

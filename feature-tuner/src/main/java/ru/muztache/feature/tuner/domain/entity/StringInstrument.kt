@@ -1,7 +1,6 @@
-package ru.muztache.feature.tuner.ui.entity.instrument
+package ru.muztache.feature.tuner.domain.entity
 
 import ru.muztache.feature.tuner.ui.engine.tone.Tone
-import ru.muztache.feature.tuner.ui.entity.tuning.Tuning
 
 abstract class StringInstrument {
 

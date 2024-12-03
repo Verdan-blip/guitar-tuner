@@ -34,7 +34,7 @@ import ru.muztache.core.common.compose.layoutPositionsFromCenter
 import ru.muztache.core.common.compose.onIntersect
 import ru.muztache.feature.tuner.ui.engine.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.impl.guitar.GuitarStandardTuning
-import ru.muztache.feature.tuner.ui.entity.tuning.Tuning
+import ru.muztache.feature.tuner.domain.entity.Tuning
 
 private val headstockDpSize: DpSize = DpSize(156.dp, 256.dp)
 

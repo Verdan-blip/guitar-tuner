@@ -15,4 +15,6 @@ object GuitarStandardTuning : GuitarTuning() {
     override val fifthString: Tone = Tone.A2
 
     override val sixthString: Tone = Tone.E2
+
+    override val stringsCount: Int = 6
 }

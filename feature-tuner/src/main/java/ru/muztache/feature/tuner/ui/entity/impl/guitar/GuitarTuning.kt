@@ -1,7 +1,7 @@
 package ru.muztache.feature.tuner.ui.entity.impl.guitar
 
 import ru.muztache.feature.tuner.ui.engine.tone.Tone
-import ru.muztache.feature.tuner.ui.entity.tuning.Tuning
+import ru.muztache.feature.tuner.domain.entity.Tuning
 
 abstract class GuitarTuning : Tuning() {
 

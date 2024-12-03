@@ -71,7 +71,7 @@ class TunerViewModel(
             val selectedString = _state.value.selectedString
             val toneForString = _state.value.selectedInstrument.getTone(selectedString)
             val analyzeResult = if (_state.value.isAutoDetect) {
-                frequencyAnalyzer.analyze(frequency)
+                frequencyAnalyzer.analyze(frequency, _state.value.selectedInstrument.tuning)
             } else {
                 frequencyAnalyzer.analyzeComparing(frequency, toneForString)
             }

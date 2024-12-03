@@ -16,6 +16,7 @@ koin = "3.5.6"
 coil = "3.0.2"
 
 tarsos = "2.5"
+datastore = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +51,8 @@ ktor-android = { group = "io.ktor", name = "ktor-client-android", version.ref = 
 
 tarsos-core = { group = "be.tarsos.dsp", name = "core", version.ref = "tarsos" }
 tarsos-jvm = { group = "be.tarsos.dsp", name = "jvm", version.ref = "tarsos" }
+
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

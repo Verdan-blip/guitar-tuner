@@ -1,7 +1,7 @@
 package ru.muztache.feature.tuner.ui.entity.impl.ukulele
 
-import ru.muztache.feature.tuner.ui.entity.instrument.StringInstrument
-import ru.muztache.feature.tuner.ui.entity.tuning.Tuning
+import ru.muztache.feature.tuner.domain.entity.StringInstrument
+import ru.muztache.feature.tuner.domain.entity.Tuning
 
 class Ukulele : StringInstrument() {
 

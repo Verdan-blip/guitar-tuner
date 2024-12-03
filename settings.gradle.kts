@@ -1,5 +1,8 @@
 import java.net.URI
 
+include(":core-data")
+
+
 pluginManagement {
     repositories {
         google {
@@ -31,3 +34,4 @@ include(":core-common")
 include(":core-theme")
 include(":core-util")
 include(":feature-tuner")
+include(":tarsos-dsp")

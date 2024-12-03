@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import org.koin.androidx.compose.koinViewModel
+import ru.muztache.core.theme.MuztacheTheme
+import ru.muztache.core.theme.paddings.Paddings
 import ru.muztache.feature.tuner.ui.composable.headstock.GuitarHeadstock
 import ru.muztache.feature.tuner.ui.composable.headstock.rememberHeadstockState
 import ru.muztache.feature.tuner.ui.composable.indicator.ProgressIndicatorLayout
@@ -88,7 +90,7 @@ private fun TunerScreenContent(
 
     Box(
         modifier = Modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = MuztacheTheme.paddings.medium)
             .then(modifier)
     ) {
         Column(
@@ -96,7 +98,7 @@ private fun TunerScreenContent(
         ) {
             Box(
                 modifier = Modifier
-                    .padding(top = 32.dp)
+                    .padding(top = MuztacheTheme.paddings.extraLarge)
             ) {
                 ProgressIndicatorLayout(
                     state = tuningIndicatorState,
@@ -145,18 +147,18 @@ private fun TunerScreenContent(
                 ),
                 fontSize = 16.sp,
                 modifier = Modifier
-                    .padding(top = 24.dp)
+                    .padding(top = MuztacheTheme.paddings.large)
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .padding(top = 8.dp)
+                    .padding(top = MuztacheTheme.paddings.normal)
             ) {
                 Text(
                     text = "Auto detect",
                     fontSize = 18.sp,
                     modifier = Modifier
-                        .padding(end = 8.dp)
+                        .padding(end = MuztacheTheme.paddings.normal)
                 )
                 Switch(
                     checked = state.isAutoDetect,
@@ -175,25 +177,28 @@ private fun TunerScreenContent(
                 onEvent(TunerEvent.StringSelect(stringNum))
             }
         )
+        
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 private fun TunerScreenContentPreview() {
-    TunerScreenContent(
-        state = TunerState(
-            isTuned = false,
-            isAutoDetect = false,
-            isEnabled = false,
-            selectedInstrument = Guitar(),
-            idolNote = Tone.B4,
-            currentFrequency = 0f,
-            selectedString = 0
-        ),
-        onEvent = { },
-        action = TunerAction.OnNewDeviation(deviation = Deviation(0f)),
-        modifier = Modifier
-            .fillMaxSize()
-    )
+    MuztacheTheme {
+        TunerScreenContent(
+            state = TunerState(
+                isTuned = false,
+                isAutoDetect = false,
+                isEnabled = false,
+                selectedInstrument = Guitar(),
+                idolNote = Tone.B4,
+                currentFrequency = 0f,
+                selectedString = 0
+            ),
+            onEvent = { },
+            action = TunerAction.OnNewDeviation(deviation = Deviation(0f)),
+            modifier = Modifier
+                .fillMaxSize()
+        )
+    }
 }
