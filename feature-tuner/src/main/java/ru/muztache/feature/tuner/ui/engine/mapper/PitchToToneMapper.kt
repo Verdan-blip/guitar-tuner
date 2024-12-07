@@ -1,6 +1,6 @@
 package ru.muztache.feature.tuner.ui.engine.mapper
 
-import ru.muztache.feature.tuner.ui.engine.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
 
 const val ROOT_C_PITCH = 16.35f
 const val ROOT_C_DIES_PITCH = 17.32f

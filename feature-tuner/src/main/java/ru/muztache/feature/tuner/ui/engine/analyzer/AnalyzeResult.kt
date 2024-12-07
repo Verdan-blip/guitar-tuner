@@ -1,6 +1,6 @@
 package ru.muztache.feature.tuner.ui.engine.analyzer
 
-import ru.muztache.feature.tuner.ui.engine.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.math.Deviation
 
 sealed class AnalyzeResult(val frequency: Float) {

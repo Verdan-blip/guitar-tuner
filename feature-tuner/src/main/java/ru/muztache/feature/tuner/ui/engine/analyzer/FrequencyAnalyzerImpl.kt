@@ -1,9 +1,9 @@
 package ru.muztache.feature.tuner.ui.engine.analyzer
 
-import ru.muztache.feature.tuner.ui.engine.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.math.Deviation
 import ru.muztache.feature.tuner.ui.entity.math.compareTo
-import ru.muztache.feature.tuner.domain.entity.Tuning
+import ru.muztache.feature.tuner.domain.entity.tuning.Tuning
 import kotlin.math.abs
 
 class FrequencyAnalyzerImpl : FrequencyAnalyzer {
@@ -11,18 +11,18 @@ class FrequencyAnalyzerImpl : FrequencyAnalyzer {
     override fun analyze(frequency: Float, tuning: Tuning): AnalyzeResult {
 
         var nearestTone = tuning.getNote(0)
-        var minDiff = frequency - nearestTone.frequency
+        var minDiff = frequency - nearestTone.rootFrequency
 
         for (i in 1..tuning.stringsCount) {
             val suspectTone = tuning.getNote(i)
-            val diff = abs(frequency - suspectTone.frequency)
+            val diff = abs(frequency - suspectTone.rootFrequency)
             if (diff < minDiff) {
                 minDiff = diff
                 nearestTone = suspectTone
             }
         }
 
-        val deviation = Deviation(frequency, nearestTone.frequency)
+        val deviation = Deviation(frequency, nearestTone.rootFrequency)
         return AnalyzeResult.Success(
             nearestTone = nearestTone,
             deviation = deviation,
@@ -33,7 +33,7 @@ class FrequencyAnalyzerImpl : FrequencyAnalyzer {
     }
 
     override fun analyzeComparing(frequency: Float, tone: Tone): AnalyzeResult {
-        val deviation = Deviation(frequency, tone.frequency)
+        val deviation = Deviation(frequency, tone.rootFrequency)
         return AnalyzeResult.Success(
             nearestTone = tone,
             deviation = deviation,

@@ -25,12 +25,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import org.koin.androidx.compose.koinViewModel
 import ru.muztache.core.theme.MuztacheTheme
-import ru.muztache.core.theme.paddings.Paddings
 import ru.muztache.feature.tuner.ui.composable.headstock.GuitarHeadstock
 import ru.muztache.feature.tuner.ui.composable.headstock.rememberHeadstockState
 import ru.muztache.feature.tuner.ui.composable.indicator.ProgressIndicatorLayout
 import ru.muztache.feature.tuner.ui.composable.indicator.rememberProgressIndicatorState
-import ru.muztache.feature.tuner.ui.engine.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.impl.guitar.Guitar
 import ru.muztache.feature.tuner.ui.entity.math.Deviation
 import ru.muztache.feature.tuner.ui.entity.math.toFraction
@@ -143,7 +142,7 @@ private fun TunerScreenContent(
             Text(
                 text = "%.1f of %.1f Hz".format(
                     state.currentFrequency,
-                    state.idolNote.frequency
+                    state.idolNote.rootFrequency
                 ),
                 fontSize = 16.sp,
                 modifier = Modifier

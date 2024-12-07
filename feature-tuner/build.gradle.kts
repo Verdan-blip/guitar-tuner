@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -36,6 +37,21 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.11.0"
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                create("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
 
     implementation(project(":core-common"))
@@ -51,6 +67,8 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.datastore.preferences)
+    implementation(libs.datastore)
+    implementation(libs.protobuf.javalite)
 
     implementation(libs.androidx.core.ktx)
 

@@ -1,9 +1,9 @@
 package ru.muztache.feature.tuner.ui.mvi
 
 import ru.muztache.core.common.base.BaseState
-import ru.muztache.feature.tuner.ui.engine.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
 import ru.muztache.feature.tuner.ui.entity.impl.guitar.Guitar
-import ru.muztache.feature.tuner.domain.entity.StringInstrument
+import ru.muztache.feature.tuner.domain.entity.instrument.StringInstrument
 
 data class TunerState(
     val isEnabled: Boolean,

@@ -1,12 +1,13 @@
 package ru.muztache.feature.tuner.domain.repository
 
-import ru.muztache.feature.tuner.domain.entity.Tuning
+import kotlinx.coroutines.flow.Flow
+import ru.muztache.feature.tuner.domain.entity.tuning.Tuning
 
-interface TuningRepository {
+interface TuningRepository<T : Tuning> {
 
-    suspend fun fetchAll(): List<Tuning>
+    val savedTunings: Flow<Map<String, T>>
 
-    suspend fun add(tuning: Tuning)
+    suspend fun add(key: String, tuning: T)
 
-    suspend fun remove(tuning: Tuning)
+    suspend fun remove(key: String)
 }

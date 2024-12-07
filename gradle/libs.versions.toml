@@ -12,6 +12,10 @@ appcompat = "1.6.1"
 material = "1.10.0"
 jetbrainsKotlinJvm = "2.0.0"
 
+protobuf = "0.9.4"
+protobuf-protoc = "21.7"
+protobuf-javalite = "3.18.0"
+
 koin = "3.5.6"
 coil = "3.0.2"
 
@@ -53,6 +57,11 @@ tarsos-core = { group = "be.tarsos.dsp", name = "core", version.ref = "tarsos" }
 tarsos-jvm = { group = "be.tarsos.dsp", name = "jvm", version.ref = "tarsos" }
 
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf-protoc" }
+protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite" }
+
+kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -60,6 +69,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-serailization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }
 
 [bundles]
 koin = ["koin-android", "koin-compose", "koin-core"]
