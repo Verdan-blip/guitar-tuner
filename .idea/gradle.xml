@@ -4,6 +4,17 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/convention-plugins/base" name="base">
+                <projects>
+                  <project path="$PROJECT_DIR$/convention-plugins/base" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
@@ -11,10 +22,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/convention-plugins/base" />
             <option value="$PROJECT_DIR$/core-common" />
             <option value="$PROJECT_DIR$/core-data" />
             <option value="$PROJECT_DIR$/core-theme" />
             <option value="$PROJECT_DIR$/core-util" />
+            <option value="$PROJECT_DIR$/feature-splash" />
             <option value="$PROJECT_DIR$/feature-tuner" />
             <option value="$PROJECT_DIR$/tarsos-dsp" />
           </set>

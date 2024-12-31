@@ -1,4 +1,10 @@
 [versions]
+minSdk = "24"
+targetSdk = "35"
+compileSdk = "35"
+
+java = "11"
+
 agp = "8.7.2"
 kotlin = "2.0.0"
 coreKtx = "1.10.1"
@@ -8,6 +14,7 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.04.01"
+compose = "1.6.10"
 appcompat = "1.6.1"
 material = "1.10.0"
 jetbrainsKotlinJvm = "2.0.0"
@@ -42,6 +49,12 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Plugins for composite build
+gradleplugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradleplugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradleplugin-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+gradleplugin-composeCompiler = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version = "compose" }
 
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" }

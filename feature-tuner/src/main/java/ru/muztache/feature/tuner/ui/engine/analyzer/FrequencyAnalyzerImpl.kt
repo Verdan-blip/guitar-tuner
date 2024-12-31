@@ -1,28 +1,27 @@
 package ru.muztache.feature.tuner.ui.engine.analyzer
 
-import ru.muztache.feature.tuner.domain.entity.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.ToneWithOctave
+import ru.muztache.feature.tuner.domain.entity.tuning.Tuning
+import ru.muztache.feature.tuner.domain.entity.tuning.forEachTone
 import ru.muztache.feature.tuner.ui.entity.math.Deviation
 import ru.muztache.feature.tuner.ui.entity.math.compareTo
-import ru.muztache.feature.tuner.domain.entity.tuning.Tuning
-import kotlin.math.abs
 
 class FrequencyAnalyzerImpl : FrequencyAnalyzer {
 
     override fun analyze(frequency: Float, tuning: Tuning): AnalyzeResult {
 
         var nearestTone = tuning.getNote(0)
-        var minDiff = frequency - nearestTone.rootFrequency
+        var minDiff = frequency - nearestTone.frequency
 
-        for (i in 1..tuning.stringsCount) {
-            val suspectTone = tuning.getNote(i)
-            val diff = abs(frequency - suspectTone.rootFrequency)
+        tuning.forEachTone(skipIndex = 0) { toneWithOctave ->
+            val diff = frequency - toneWithOctave.frequency
             if (diff < minDiff) {
                 minDiff = diff
-                nearestTone = suspectTone
+                nearestTone = toneWithOctave
             }
         }
 
-        val deviation = Deviation(frequency, nearestTone.rootFrequency)
+        val deviation = Deviation(frequency, nearestTone.frequency)
         return AnalyzeResult.Success(
             nearestTone = nearestTone,
             deviation = deviation,
@@ -32,10 +31,13 @@ class FrequencyAnalyzerImpl : FrequencyAnalyzer {
         )
     }
 
-    override fun analyzeComparing(frequency: Float, tone: Tone): AnalyzeResult {
-        val deviation = Deviation(frequency, tone.rootFrequency)
+    override fun analyzeComparing(
+        frequency: Float,
+        toneToCompare: ToneWithOctave
+    ): AnalyzeResult {
+        val deviation = Deviation(frequency, toneToCompare.frequency)
         return AnalyzeResult.Success(
-            nearestTone = tone,
+            nearestTone = toneToCompare,
             deviation = deviation,
             isTuned = deviation > ACCEPTABLE_DEVIATION_MIN_VALUE
                     && deviation < ACCEPTABLE_DEVIATION_MAX_VALUE,

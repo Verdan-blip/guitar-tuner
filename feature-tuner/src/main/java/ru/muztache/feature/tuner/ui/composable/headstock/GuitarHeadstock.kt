@@ -21,7 +21,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.IntSize
@@ -32,8 +31,7 @@ import ru.muztache.core.common.compose.asPxValue
 import ru.muztache.core.common.compose.asSize
 import ru.muztache.core.common.compose.layoutPositionsFromCenter
 import ru.muztache.core.common.compose.onIntersect
-import ru.muztache.feature.tuner.domain.entity.tone.Tone
-import ru.muztache.feature.tuner.ui.entity.impl.guitar.GuitarStandardTuning
+import ru.muztache.feature.tuner.domain.entity.tone.ToneWithOctave
 import ru.muztache.feature.tuner.domain.entity.tuning.Tuning
 
 private val headstockDpSize: DpSize = DpSize(156.dp, 256.dp)
@@ -297,7 +295,7 @@ fun DrawScope.drawPeg(
 }
 
 fun DrawScope.drawPegHole(
-    tone: Tone,
+    tone: ToneWithOctave,
     textSize: TextUnit = TextUnit.Unspecified,
     textColor: Color,
     textMeasurer: TextMeasurer,
@@ -306,7 +304,7 @@ fun DrawScope.drawPegHole(
     color: Color
 ) {
     val measureResult = textMeasurer.measure(
-        text = tone.name,
+        text = tone.toString(),
         style = TextStyle(
             color = textColor,
             fontSize = textSize,
@@ -351,12 +349,3 @@ fun DrawScope.drawSill(
     )
 }
 
-@Preview
-@Composable
-private fun GuitarHeadstockPreview() {
-    GuitarHeadstock(
-        tuning = GuitarStandardTuning,
-        headstockState = rememberHeadstockState(),
-        onStringSelect = { }
-    )
-}

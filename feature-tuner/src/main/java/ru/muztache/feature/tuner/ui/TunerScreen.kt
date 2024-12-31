@@ -25,12 +25,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import org.koin.androidx.compose.koinViewModel
 import ru.muztache.core.theme.MuztacheTheme
+import ru.muztache.feature.tuner.domain.entity.instrument.Guitar
+import ru.muztache.feature.tuner.domain.entity.tone.Tone
+import ru.muztache.feature.tuner.domain.entity.tone.ToneWithOctave
+import ru.muztache.feature.tuner.domain.entity.tuning.GuitarTuning
 import ru.muztache.feature.tuner.ui.composable.headstock.GuitarHeadstock
 import ru.muztache.feature.tuner.ui.composable.headstock.rememberHeadstockState
 import ru.muztache.feature.tuner.ui.composable.indicator.ProgressIndicatorLayout
 import ru.muztache.feature.tuner.ui.composable.indicator.rememberProgressIndicatorState
-import ru.muztache.feature.tuner.domain.entity.tone.Tone
-import ru.muztache.feature.tuner.ui.entity.impl.guitar.Guitar
 import ru.muztache.feature.tuner.ui.entity.math.Deviation
 import ru.muztache.feature.tuner.ui.entity.math.toFraction
 import ru.muztache.feature.tuner.ui.entity.math.toPercents
@@ -142,7 +144,7 @@ private fun TunerScreenContent(
             Text(
                 text = "%.1f of %.1f Hz".format(
                     state.currentFrequency,
-                    state.idolNote.rootFrequency
+                    state.idolNote.tone.rootFrequency
                 ),
                 fontSize = 16.sp,
                 modifier = Modifier
@@ -184,13 +186,31 @@ private fun TunerScreenContent(
 @Composable
 private fun TunerScreenContentPreview() {
     MuztacheTheme {
+        val tuning = GuitarTuning(
+            string1 = ToneWithOctave(Tone.E, 4),
+            string2 = ToneWithOctave(Tone.B, 3),
+            string3 = ToneWithOctave(Tone.G, 3),
+            string4 = ToneWithOctave(Tone.D, 3),
+            string5 = ToneWithOctave(Tone.A, 2),
+            string6 = ToneWithOctave(Tone.E, 2)
+        )
+        val instrument = Guitar(tuning = tuning)
         TunerScreenContent(
             state = TunerState(
                 isTuned = false,
                 isAutoDetect = false,
                 isEnabled = false,
-                selectedInstrument = Guitar(),
-                idolNote = Tone.B4,
+                selectedInstrument = Guitar(
+                    tuning = GuitarTuning(
+                        string1 = ToneWithOctave(Tone.E, 4),
+                        string2 = ToneWithOctave(Tone.B, 3),
+                        string3 = ToneWithOctave(Tone.G, 3),
+                        string4 = ToneWithOctave(Tone.D, 3),
+                        string5 = ToneWithOctave(Tone.A, 2),
+                        string6 = ToneWithOctave(Tone.E, 2)
+                    )
+                ),
+                idolNote = instrument.getToneWithOctave(0),
                 currentFrequency = 0f,
                 selectedString = 0
             ),

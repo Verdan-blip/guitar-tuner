@@ -43,7 +43,7 @@ class TunerViewModel(
                 val stringNumber = event.stringNumber
                 _state.value = _state.value.copy(
                     selectedString = stringNumber,
-                    idolNote = instrument.getTone(stringNumber)
+                    idolNote = instrument.getToneWithOctave(stringNumber)
                 )
             }
             is TunerEvent.AutoDetectSwitch -> {
@@ -69,7 +69,7 @@ class TunerViewModel(
     private suspend fun collectPitches() {
         frequencyProcessor.frequency.collect { frequency ->
             val selectedString = _state.value.selectedString
-            val toneForString = _state.value.selectedInstrument.getTone(selectedString)
+            val toneForString = _state.value.selectedInstrument.getToneWithOctave(selectedString)
             val analyzeResult = if (_state.value.isAutoDetect) {
                 frequencyAnalyzer.analyze(frequency, _state.value.selectedInstrument.tuning)
             } else {

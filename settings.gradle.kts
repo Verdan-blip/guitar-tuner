@@ -1,9 +1,8 @@
 import java.net.URI
 
-include(":core-data")
-
 
 pluginManagement {
+    includeBuild("convention-plugins/base")
     repositories {
         google {
             content {
@@ -29,9 +28,13 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "guitar-tuner"
+
 include(":app")
 include(":core-common")
+include(":core-data")
 include(":core-theme")
 include(":core-util")
+
+include(":feature-splash")
 include(":feature-tuner")
 include(":tarsos-dsp")
