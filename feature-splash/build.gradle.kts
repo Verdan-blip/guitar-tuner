@@ -1,10 +1,12 @@
+import ru.muztache.conventionplugins.base.extensions.implementation
+
 plugins {
     id("base.feature.dependencies")
     id("base.feature.config")
 }
 
 android {
-    namespace = "com.example.feature.splash"
+    namespace = "ru.muztache.feature.splash"
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -13,5 +15,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-tuner:feature-tuner-api"))
 
+    implementation(libs.androidx.core.splashscreen)
 }

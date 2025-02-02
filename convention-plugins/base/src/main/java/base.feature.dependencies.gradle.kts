@@ -1,11 +1,12 @@
-import com.loveandlaw.conventionplugins.base.extensions.androidConfig
-import com.loveandlaw.conventionplugins.base.extensions.implementation
-import com.loveandlaw.conventionplugins.base.extensions.testImplementation
-import com.loveandlaw.conventionplugins.base.extensions.androidTestImplementation
-import com.loveandlaw.conventionplugins.base.extensions.debugImplementation
-import com.loveandlaw.conventionplugins.base.extensions.libs
-import com.loveandlaw.conventionplugins.base.extensions.projectImplementation
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.project
+import ru.muztache.conventionplugins.base.extensions.androidConfig
+import ru.muztache.conventionplugins.base.extensions.androidTestImplementation
+import ru.muztache.conventionplugins.base.extensions.debugImplementation
+import ru.muztache.conventionplugins.base.extensions.implementation
+import ru.muztache.conventionplugins.base.extensions.libs
+import ru.muztache.conventionplugins.base.extensions.projectImplementation
+import ru.muztache.conventionplugins.base.extensions.testImplementation
 
 plugins {
     id("com.android.library")
@@ -43,6 +44,9 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
+
+    //Navigation
+    implementation(libs.androidx.navigation)
 
     //Testing
     testImplementation(libs.junit)

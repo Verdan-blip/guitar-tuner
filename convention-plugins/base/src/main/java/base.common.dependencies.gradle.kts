@@ -1,9 +1,10 @@
-import com.loveandlaw.conventionplugins.base.extensions.androidConfig
-import com.loveandlaw.conventionplugins.base.extensions.androidTestImplementation
-import com.loveandlaw.conventionplugins.base.extensions.debugImplementation
-import com.loveandlaw.conventionplugins.base.extensions.implementation
-import com.loveandlaw.conventionplugins.base.extensions.libs
-import com.loveandlaw.conventionplugins.base.extensions.testImplementation
+import org.gradle.kotlin.dsl.dependencies
+import ru.muztache.conventionplugins.base.extensions.androidConfig
+import ru.muztache.conventionplugins.base.extensions.androidTestImplementation
+import ru.muztache.conventionplugins.base.extensions.debugImplementation
+import ru.muztache.conventionplugins.base.extensions.implementation
+import ru.muztache.conventionplugins.base.extensions.libs
+import ru.muztache.conventionplugins.base.extensions.testImplementation
 
 plugins {
     id("com.android.library")

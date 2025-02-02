@@ -1,5 +1,3 @@
-import com.loveandlaw.conventionplugins.base.extensions.implementation
-
 plugins {
     id("base.common.dependencies")
     id("base.common.config")

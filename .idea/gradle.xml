@@ -29,6 +29,8 @@
             <option value="$PROJECT_DIR$/core-util" />
             <option value="$PROJECT_DIR$/feature-splash" />
             <option value="$PROJECT_DIR$/feature-tuner" />
+            <option value="$PROJECT_DIR$/feature-tuner/feature-tuner-api" />
+            <option value="$PROJECT_DIR$/feature-tuner/feature-tuner-impl" />
             <option value="$PROJECT_DIR$/tarsos-dsp" />
           </set>
         </option>

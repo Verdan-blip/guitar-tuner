@@ -1,8 +1,8 @@
-import com.loveandlaw.conventionplugins.base.extensions.androidConfig
-import com.loveandlaw.conventionplugins.base.extensions.kotlinJvmCompilerOptions
-import com.loveandlaw.conventionplugins.base.extensions.libs
-import com.loveandlaw.conventionplugins.base.extensions.projectJavaVersion
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import ru.muztache.conventionplugins.base.extensions.androidConfig
+import ru.muztache.conventionplugins.base.extensions.kotlinJvmCompilerOptions
+import ru.muztache.conventionplugins.base.extensions.libs
+import ru.muztache.conventionplugins.base.extensions.projectJavaVersion
 
 androidConfig {
 

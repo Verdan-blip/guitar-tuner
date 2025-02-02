@@ -1,4 +1,4 @@
-import com.loveandlaw.conventionplugins.base.extensions.implementation
+import ru.muztache.conventionplugins.base.extensions.implementation
 
 plugins {
     id("base.common.dependencies")
@@ -17,4 +17,5 @@ android {
 dependencies {
     implementation(project(":core-common"))
     implementation(project(":core-util"))
+    implementation(libs.androidx.animation.graphics.android)
 }

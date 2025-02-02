@@ -5,7 +5,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.loveandlaw.conventionplugins.base"
+group = "ru.muztache.conventionplugins.base"
 
 dependencies {
     implementation(libs.gradleplugin.android)

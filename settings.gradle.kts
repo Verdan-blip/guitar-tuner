@@ -1,6 +1,5 @@
 import java.net.URI
 
-
 pluginManagement {
     includeBuild("convention-plugins/base")
     repositories {
@@ -35,6 +34,8 @@ include(":core-data")
 include(":core-theme")
 include(":core-util")
 
+include(":feature-tuner:feature-tuner-impl")
+include(":feature-tuner:feature-tuner-api")
 include(":feature-splash")
 include(":feature-tuner")
 include(":tarsos-dsp")

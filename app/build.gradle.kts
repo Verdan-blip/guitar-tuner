@@ -1,7 +1,10 @@
+import ru.muztache.conventionplugins.base.extensions.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serailization)
 }
 
 android {
@@ -11,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "ru.muztache.guitartuner"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -40,17 +43,22 @@ android {
 }
 
 dependencies {
-
     implementation(project(":core-common"))
     implementation(project(":core-util"))
     implementation(project(":core-theme"))
 
-    implementation(project(":feature-tuner"))
+    implementation(project(":feature-tuner:feature-tuner-api"))
+    implementation(project(":feature-tuner:feature-tuner-impl"))
+    implementation(project(":feature-splash"))
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
 
+    implementation(libs.androidx.navigation)
+    implementation(libs.kotlin.serialization.json)
+
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
