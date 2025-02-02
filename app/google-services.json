@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645606641971",
+    "project_id": "android-tuner-app",
+    "storage_bucket": "android-tuner-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645606641971:android:40effbece0d33d0cdbee46",
+        "android_client_info": {
+          "package_name": "ru.muztache"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVL5mm4TjcuvTtO_LVqRs9G-XV3TuT4Kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

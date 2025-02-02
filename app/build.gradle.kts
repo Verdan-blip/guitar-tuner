@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serailization)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -43,13 +45,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":core-common"))
-    implementation(project(":core-util"))
-    implementation(project(":core-theme"))
+    implementation(project(":core:core-common"))
+    implementation(project(":core:core-util"))
+    implementation(project(":core:core-theme"))
+    implementation(project(":feature:feature-tuner:feature-tuner-api"))
+    implementation(project(":feature:feature-tuner:feature-tuner-impl"))
 
-    implementation(project(":feature-tuner:feature-tuner-api"))
-    implementation(project(":feature-tuner:feature-tuner-impl"))
-    implementation(project(":feature-splash"))
+    implementation(project(":feature:feature-splash"))
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)

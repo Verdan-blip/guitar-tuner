@@ -1,5 +1,9 @@
 import java.net.URI
 
+include(":feature:feature-signup")
+
+
+
 pluginManagement {
     includeBuild("convention-plugins/base")
     repositories {
@@ -29,13 +33,12 @@ dependencyResolutionManagement {
 rootProject.name = "guitar-tuner"
 
 include(":app")
-include(":core-common")
-include(":core-data")
-include(":core-theme")
-include(":core-util")
+include(":core:core-common")
+include(":core:core-data")
+include(":core:core-theme")
+include(":core:core-util")
 
-include(":feature-tuner:feature-tuner-impl")
-include(":feature-tuner:feature-tuner-api")
-include(":feature-splash")
-include(":feature-tuner")
+include(":feature:feature-tuner:feature-tuner-impl")
+include(":feature:feature-tuner:feature-tuner-api")
+include(":feature:feature-splash")
 include(":tarsos-dsp")

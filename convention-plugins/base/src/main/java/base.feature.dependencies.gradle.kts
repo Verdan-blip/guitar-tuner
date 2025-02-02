@@ -23,11 +23,11 @@ androidConfig {
 dependencies {
 
     //Common modules
-    projectImplementation(project(":core-common"))
-    projectImplementation(project(":core-data"))
-    projectImplementation(project(":core-data"))
-    projectImplementation(project(":core-theme"))
-    projectImplementation(project(":core-util"))
+    projectImplementation(project(":core:core-common"))
+    projectImplementation(project(":core:core-data"))
+    projectImplementation(project(":core:core-data"))
+    projectImplementation(project(":core:core-theme"))
+    projectImplementation(project(":core:core-util"))
 
     //Compose
     implementation(libs.androidx.core.ktx)

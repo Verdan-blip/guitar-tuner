@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     alias(libs.plugins.protobuf) apply false
     alias(libs.plugins.kotlin.serailization) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
     id("base.common.config") apply false
     id("base.common.dependencies") apply false
     id("base.feature.config") apply false
