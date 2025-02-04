@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.muztache.feature.profile.ui.ProfileScreen
-import ru.muztache.feature.signup.ui.SignUpScreen
 import ru.muztache.feature.tuner.impl.ui.TunerScreen
 import ru.muztache.guitartuner.navigation.BottomNavRoute
 import ru.muztache.guitartuner.navigation.Route

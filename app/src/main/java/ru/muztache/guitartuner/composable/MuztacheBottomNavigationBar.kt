@@ -11,7 +11,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import ru.muztache.guitartuner.navigation.BottomNavRoute
-import ru.muztache.guitartuner.navigation.getBottomNavRoutes
 
 @Composable
 fun MuztacheBottomNavigationBar(
