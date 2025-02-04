@@ -6,46 +6,37 @@ import androidx.compose.ui.graphics.Color
 data class ColorScheme(
     val primary: Color,
     val onPrimary: Color,
-    val secondary: Color,
-    val onSecondary: Color,
-    val background: Color,
-    val onBackground: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
     val surface: Color,
-    val onSurface: Color,
-    val error: Color,
-    val onError: Color,
-    val success: Color,
-    val onSuccess: Color
+    val background: Color,
+    val border: Color,
+    val neutral: Color,
+    val reference: Color
 )
 
 val muztacheLightColorScheme: ColorScheme = ColorScheme(
-    primary = Color(171, 104, 58),
-    onPrimary = Color(255, 255, 255, 255),
-    secondary = Color(130, 70, 23, 255),
-    onSecondary = Color(255, 255, 255, 255),
-    background = Color(232, 232, 232, 255),
-    onBackground =  Color(0, 0, 0, 255),
-    surface = Color(213, 213, 213, 255),
-    onSurface = Color(0, 0, 0, 255),
-    error = Color(255, 88, 88, 255),
-    onError = Color(255, 255, 255, 255),
-    success = Color(85, 163, 87, 255),
-    onSuccess = Color(255, 255, 255, 255)
+    primary = Color(0xFF42C83C),
+    onPrimary = Color(0xFFFFFFFF),
+    textPrimary = Color(0xFF383838),
+    textSecondary = Color(0xFF797979),
+    surface = Color(0xFFE6E6E6),
+    background = Color(0xFFF2F2F2),
+    border = Color(0xFF000000),
+    neutral = Color(0xFFB4B4B4),
+    reference = Color(0xFF288CE9)
 )
 
 val muztacheDarkColorScheme: ColorScheme = ColorScheme(
-    primary = Color(171, 104, 58),
-    onPrimary = Color(255, 255, 255, 255),
-    secondary = Color(130, 70, 23, 255),
-    onSecondary = Color(255, 255, 255, 255),
-    background = Color(232, 232, 232, 255),
-    onBackground =  Color(0, 0, 0, 255),
-    surface = Color(43, 38, 38, 255),
-    onSurface = Color(255, 255, 255, 255),
-    error = Color(255, 88, 88, 255),
-    onError = Color(255, 255, 255, 255),
-    success = Color(85, 163, 87, 255),
-    onSuccess = Color(255, 255, 255, 255)
+    primary = Color(0xFF42C83C),
+    onPrimary = Color(0xFFFFFFFF),
+    textPrimary = Color(0xFF383838),
+    textSecondary = Color(0xFF797979),
+    surface = Color(0xFFE6E6E6),
+    background = Color(0xFFF2F2F2),
+    border = Color(0xFF000000),
+    neutral = Color(0xFFB4B4B4),
+    reference = Color(0xFF288CE9)
 )
 
 val LocalMuztacheColors = staticCompositionLocalOf<ColorScheme> {

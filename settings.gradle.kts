@@ -1,5 +1,11 @@
 import java.net.URI
 
+include(":feature:feature-profile")
+
+
+include(":feature:feature-signin")
+
+
 include(":feature:feature-signup")
 
 

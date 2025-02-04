@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="use_all_features_with_account">Используйте все возможности с авторизацией!</string>
+    <string name="description">MuztacheTuner - это отличный вариант, когда Вам нужно настроить музыкальный инструмент под любой строй</string>
+    <string name="register">Начать</string>
+    <string name="login">Войти</string>
+</resources>

@@ -71,7 +71,7 @@ fun SplashScreenContent(
             Text(
                 text = stringResource(R.string.loading),
                 style = MuztacheTheme.typography.titleSmall,
-                color = MuztacheTheme.colors.onSurface,
+                color = MuztacheTheme.colors.textPrimary,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
             )

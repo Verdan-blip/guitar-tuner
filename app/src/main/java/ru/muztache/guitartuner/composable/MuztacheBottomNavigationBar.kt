@@ -20,8 +20,10 @@ fun MuztacheBottomNavigationBar(
     selectedIndex: MutableIntState,
     navHostController: NavHostController
 ) {
-    NavigationBar {
-        getBottomNavRoutes().forEachIndexed { index, route ->
+    NavigationBar(
+        modifier = modifier
+    ) {
+        routes.forEachIndexed { index, route ->
             NavigationBarItem(
                 selected = index == selectedIndex.intValue,
                 onClick = {

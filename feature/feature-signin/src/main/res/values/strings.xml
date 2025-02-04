@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_signin">Войти</string>
+    <string name="hint_email">Почта</string>
+    <string name="hint_password">Пароль</string>
+    <string name="if_you_already_have_an_account">Если у Вас уже есть аккаунт, то</string>
+    <string name="signin">Войти</string>
+    <string name="click_here">Нажмите здесь</string>
+</resources>

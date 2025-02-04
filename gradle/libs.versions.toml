@@ -109,4 +109,5 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 
 [bundles]
 koin = ["koin-android", "koin-compose", "koin-core"]
+firebase = ["firebase-crashlytics", "firebase-performance", "firebase-analytics", "firebase-authentication"]
 

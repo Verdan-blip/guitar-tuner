@@ -45,19 +45,25 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:core-data"))
     implementation(project(":core:core-common"))
     implementation(project(":core:core-util"))
     implementation(project(":core:core-theme"))
     implementation(project(":feature:feature-tuner:feature-tuner-api"))
     implementation(project(":feature:feature-tuner:feature-tuner-impl"))
-
+    implementation(project(":feature:feature-signup"))
+    implementation(project(":feature:feature-signin"))
     implementation(project(":feature:feature-splash"))
+    implementation(project(":feature:feature-profile"))
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
 
     implementation(libs.androidx.navigation)
     implementation(libs.kotlin.serialization.json)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)

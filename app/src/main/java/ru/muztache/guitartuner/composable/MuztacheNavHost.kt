@@ -11,6 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.muztache.feature.signin.ui.SignInScreen
+import ru.muztache.feature.signup.ui.SignUpScreen
 import ru.muztache.feature.splash.ui.SplashScreen
 import ru.muztache.guitartuner.navigation.BottomNavRoute
 import ru.muztache.guitartuner.navigation.Route
@@ -36,6 +38,26 @@ fun MuztacheNavHost(
                     .fillMaxSize()
             )
         }
+        composable<Route.SignIn> {
+            SignInScreen(
+                onNavigateToProfile = {
+                    navController.navigate(Route.BottomNavigationRoute)
+                },
+                onNavigateToSignUp = {
+                    navController.navigate(Route.SignUp)
+                }
+            )
+        }
+        composable<Route.SignUp> {
+            SignUpScreen(
+                onNavigateToProfile = {
+                    navController.navigate(Route.BottomNavigationRoute)
+                },
+                onNavigateToSignIn = {
+                    navController.navigate(Route.SignIn)
+                }
+            )
+        }
         composable<Route.BottomNavigationRoute> {
             val selectedIndex = remember { mutableIntStateOf(0) }
             val bottomNavController = rememberNavController()
@@ -49,7 +71,8 @@ fun MuztacheNavHost(
                 }
             ) { innerPaddings ->
                 MuztacheBottomNavHost(
-                    navController = bottomNavController,
+                    navController = navController,
+                    bottomNavController = bottomNavController,
                     startDestination = BottomNavRoute.Tuner,
                     modifier = Modifier
                         .padding(innerPaddings)

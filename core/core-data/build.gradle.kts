@@ -1,6 +1,7 @@
 plugins {
     id("base.common.dependencies")
     id("base.common.config")
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -15,4 +16,6 @@ android {
 dependencies {
     implementation(project(":core:core-common"))
     implementation(project(":core:core-util"))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.authentication)
 }

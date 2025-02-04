@@ -9,5 +9,11 @@ sealed interface Route {
     data object Splash : Route
 
     @Serializable
+    data object SignIn : Route
+
+    @Serializable
+    data object SignUp : Route
+
+    @Serializable
     data object BottomNavigationRoute : Route
 }

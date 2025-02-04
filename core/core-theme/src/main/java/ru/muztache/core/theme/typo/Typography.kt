@@ -6,27 +6,33 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 data class Typography(
+    val displayLarge: TextStyle,
+    val displayMedium: TextStyle,
+    val displaySmall: TextStyle,
     val titleSmall: TextStyle,
     val titleMedium: TextStyle,
     val titleLarge: TextStyle,
-    val subtitleSmall: TextStyle,
-    val subtitleMedium: TextStyle,
-    val subtitleLarge: TextStyle,
     val bodySmall: TextStyle,
     val bodyMedium: TextStyle,
-    val bodyLarge: TextStyle
+    val bodyLarge: TextStyle,
+    val labelSmall: TextStyle,
+    val labelMedium: TextStyle,
+    val labelLarge: TextStyle,
 )
 
 val muztacheTypography: Typography = Typography(
-    titleSmall = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.W400),
-    titleMedium = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.W400),
-    titleLarge = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.W400),
-    subtitleSmall = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.W300),
-    subtitleMedium = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.W400),
-    subtitleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.W400),
-    bodySmall = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.W300),
-    bodyMedium = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.W400),
-    bodyLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.W400)
+    displaySmall = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold),
+    displayMedium = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+    displayLarge = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.SemiBold),
+    titleSmall = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+    titleMedium = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold),
+    titleLarge = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+    bodySmall = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Normal),
+    bodyMedium = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Normal),
+    bodyLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Normal),
+    labelSmall = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Normal),
+    labelMedium = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Medium),
+    labelLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold)
 )
 
 val LocalMuztacheTypography = staticCompositionLocalOf<Typography> {

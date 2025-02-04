@@ -6,6 +6,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import ru.muztache.core.common.base.BaseActivity
 import ru.muztache.core.theme.MuztacheTheme
+import ru.muztache.core.theme.composable.surface.MuztacheSurface
 import ru.muztache.guitartuner.composable.MuztacheNavHost
 import ru.muztache.guitartuner.navigation.Route
 
@@ -17,11 +18,13 @@ class MainActivity : BaseActivity() {
 
         setContent {
             MuztacheTheme {
-                val navController = rememberNavController()
-                MuztacheNavHost(
-                    navController = navController,
-                    startDestination = Route.Splash
-                )
+                MuztacheSurface {
+                    val navController = rememberNavController()
+                    MuztacheNavHost(
+                        navController = navController,
+                        startDestination = Route.Splash
+                    )
+                }
             }
         }
     }

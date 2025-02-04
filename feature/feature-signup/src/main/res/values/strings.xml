@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_signup">Зарегистрироваться</string>
+    <string name="if_you_have_an_account">Если у вас уже есть аккаунт, то</string>
+    <string name="hint_email">Почта</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_confirmed_password">Подтвердите</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="click_here">Нажмите здесь</string>
+    <string name="invalid_email_format">Почта не соответствтует</string>
+    <string name="insecure_password">Пароль должен состоять не мене из 8 символов, содержать заглавные и строчные буквы и цифры</string>
+    <string name="passwords_does_not_match">Пароли не совпадают</string>
+</resources>
