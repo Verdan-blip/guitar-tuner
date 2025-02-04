@@ -1,6 +1,7 @@
 package ru.muztache.feature.profile.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -109,7 +110,7 @@ private fun ProfileScreenContent(
             ) {
                 MuztacheTextButton(
                     text = stringResource(R.string.register),
-                    onClick = { onEvent(Event.RegisterClick) },
+                    onClick = { onEvent(Event.SignUpClick) },
                     modifier = Modifier
                         .weight(0.5f)
                 )
@@ -121,6 +122,7 @@ private fun ProfileScreenContent(
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                         .weight(0.5f)
+                        .clickable { onEvent(Event.SignInClick) }
                 )
             }
         }

@@ -4,7 +4,7 @@ import ru.muztache.core.common.base.mvi.BaseEvent
 
 internal sealed interface Event : BaseEvent {
 
-    data object RegisterClick : Event
+    data object SignUpClick : Event
 
-    data object LogInClick : Event
+    data object SignInClick : Event
 }

@@ -6,6 +6,7 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import ru.muztache.core.common.di.commonModule
 import ru.muztache.core.data.di.dataModule
+import ru.muztache.feature.profile.di.featureProfileModule
 import ru.muztache.feature.signin.di.featureSignInModule
 import ru.muztache.feature.signup.di.featureSignUpModule
 import ru.muztache.feature.splash.di.featureSplashModule
@@ -26,6 +27,7 @@ class App : Application() {
             modules(featureSplashModule)
             modules(featureSignUpModule)
             modules(featureSignInModule)
+            modules(featureProfileModule)
         }
     }
 }

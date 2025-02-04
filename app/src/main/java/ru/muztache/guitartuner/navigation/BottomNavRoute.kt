@@ -1,35 +1,33 @@
 package ru.muztache.guitartuner.navigation
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import kotlinx.serialization.Serializable
+import ru.muztache.core.theme.composable.navigation.BottomNavItem
 import ru.muztache.guitartuner.R
 
 @Serializable
-sealed class BottomNavRoute(
-    @StringRes val labelId: Int,
-    @DrawableRes val iconId: Int
-) {
+sealed interface BottomNavRoute {
 
     @Serializable
-    data object Tuner : BottomNavRoute(
-        labelId = R.string.tuner,
-        iconId = R.drawable.ic_tuner24
-    )
+    data object Tuner : BottomNavRoute
 
     @Serializable
-    data object Chords : BottomNavRoute(
-        labelId = R.string.chords,
-        iconId = R.drawable.ic_chords_24
-    )
+    data object Chords : BottomNavRoute
 
     @Serializable
-    data object Profile : BottomNavRoute(
-        labelId = R.string.profile,
-        iconId = R.drawable.ic_person_24
-    )
+    data object Profile : BottomNavRoute
 }
 
-fun getBottomNavRoutes(): List<BottomNavRoute> = listOf(
-    BottomNavRoute.Tuner, BottomNavRoute.Chords, BottomNavRoute.Profile
+val bottomNavigationItems: List<BottomNavItem> @Composable get() = listOf(
+    BottomNavItem(
+        ImageVector.vectorResource(R.drawable.ic_tuner24), BottomNavRoute.Tuner
+    ),
+    BottomNavItem(
+        ImageVector.vectorResource(R.drawable.ic_chords_24), BottomNavRoute.Chords
+    ),
+    BottomNavItem(
+        ImageVector.vectorResource(R.drawable.ic_person_24), BottomNavRoute.Profile
+    )
 )

@@ -1,6 +1,7 @@
 package ru.muztache.guitartuner.composable
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -11,12 +12,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.muztache.core.theme.composable.navigation.MuztacheBottomNavigation
 import ru.muztache.feature.signin.ui.SignInScreen
 import ru.muztache.feature.signup.ui.SignUpScreen
 import ru.muztache.feature.splash.ui.SplashScreen
-import ru.muztache.guitartuner.navigation.BottomNavRoute
 import ru.muztache.guitartuner.navigation.Route
-import ru.muztache.guitartuner.navigation.getBottomNavRoutes
+import ru.muztache.guitartuner.navigation.bottomNavigationItems
 
 @Composable
 fun MuztacheNavHost(
@@ -45,7 +46,9 @@ fun MuztacheNavHost(
                 },
                 onNavigateToSignUp = {
                     navController.navigate(Route.SignUp)
-                }
+                },
+                modifier = Modifier
+                    .fillMaxSize()
             )
         }
         composable<Route.SignUp> {
@@ -55,25 +58,37 @@ fun MuztacheNavHost(
                 },
                 onNavigateToSignIn = {
                     navController.navigate(Route.SignIn)
-                }
+                },
+                modifier = Modifier
+                    .fillMaxSize()
             )
         }
         composable<Route.BottomNavigationRoute> {
-            val selectedIndex = remember { mutableIntStateOf(0) }
             val bottomNavController = rememberNavController()
+            val bottomNavItems = bottomNavigationItems
+            val startIndex = 0
+            val selectedIndex = remember { mutableIntStateOf(startIndex) }
             Scaffold(
                 bottomBar = {
-                    MuztacheBottomNavigationBar(
-                        routes = getBottomNavRoutes(),
-                        selectedIndex = selectedIndex,
-                        navHostController = bottomNavController
+                    MuztacheBottomNavigation(
+                        selectedItemIndex = selectedIndex.intValue,
+                        items = bottomNavItems,
+                        onClick = { item ->
+                            bottomNavController.navigate(item.route) {
+                                launchSingleTop = true
+                                popUpTo(bottomNavItems[startIndex].route)
+                            }
+                            selectedIndex.intValue = bottomNavItems.indexOf(item)
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
                     )
                 }
             ) { innerPaddings ->
                 MuztacheBottomNavHost(
                     navController = navController,
                     bottomNavController = bottomNavController,
-                    startDestination = BottomNavRoute.Tuner,
+                    startDestination = bottomNavItems[startIndex].route,
                     modifier = Modifier
                         .padding(innerPaddings)
                 )

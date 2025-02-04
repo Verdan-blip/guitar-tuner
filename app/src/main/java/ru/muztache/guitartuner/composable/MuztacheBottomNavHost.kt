@@ -15,7 +15,7 @@ import ru.muztache.guitartuner.navigation.Route
 fun MuztacheBottomNavHost(
     bottomNavController: NavHostController,
     navController: NavHostController,
-    startDestination: BottomNavRoute,
+    startDestination: Any,
     modifier: Modifier = Modifier
 ) {
     NavHost(
