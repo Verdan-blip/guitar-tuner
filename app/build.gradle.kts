@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.serailization)
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.sqldelight)
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     implementation(project(":feature:feature-signin"))
     implementation(project(":feature:feature-splash"))
     implementation(project(":feature:feature-profile"))
+    implementation(project(":feature:feature-chords"))
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
@@ -64,6 +66,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
+
+    implementation(libs.sqldelight)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)

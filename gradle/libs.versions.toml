@@ -37,6 +37,7 @@ animationGraphicsAndroid = "1.7.6"
 google-services = "4.4.2"
 firebase-bom = "33.8.0"
 firebase-crashlytics = "3.0.2"
+sqldelight = "2.0.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -93,6 +94,8 @@ datastore = { group = "androidx.datastore", name = "datastore", version.ref = "d
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf-protoc" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite" }
 
+sqldelight = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
+
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 androidx-animation-graphics-android = { group = "androidx.compose.animation", name = "animation-graphics-android", version.ref = "animationGraphicsAndroid" }
 
@@ -106,6 +109,7 @@ kotlin-serailization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf" }
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [bundles]
 koin = ["koin-android", "koin-compose", "koin-core"]

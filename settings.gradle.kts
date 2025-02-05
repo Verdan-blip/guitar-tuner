@@ -1,5 +1,8 @@
 import java.net.URI
 
+include(":feature:feature-chords")
+
+
 include(":feature:feature-profile")
 
 
