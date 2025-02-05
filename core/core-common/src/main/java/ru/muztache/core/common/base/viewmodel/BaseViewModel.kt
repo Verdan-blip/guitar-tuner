@@ -17,11 +17,11 @@ abstract class BaseViewModel<S : BaseState, EV : BaseEvent> : ViewModel() {
 
     abstract fun reducer(event: EV)
 
-    protected suspend fun doSafeCall(
-        onException: (Exception) -> Unit = { },
-        body: suspend () -> Unit
-    ) {
-        try {
+    protected suspend fun <T> doSafeCall(
+        onException: (Exception) -> T = { throw it },
+        body: suspend () -> T
+    ): T {
+        return try {
             body()
         } catch (ex: Exception) {
             onException(ex)

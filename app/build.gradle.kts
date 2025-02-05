@@ -52,11 +52,12 @@ dependencies {
     implementation(project(":core:core-theme"))
     implementation(project(":feature:feature-tuner:feature-tuner-api"))
     implementation(project(":feature:feature-tuner:feature-tuner-impl"))
+    implementation(project(":feature:feature-chords:feature-chords-api"))
+    implementation(project(":feature:feature-chords:feature-chords-impl"))
     implementation(project(":feature:feature-signup"))
     implementation(project(":feature:feature-signin"))
     implementation(project(":feature:feature-splash"))
     implementation(project(":feature:feature-profile"))
-    implementation(project(":feature:feature-chords"))
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)

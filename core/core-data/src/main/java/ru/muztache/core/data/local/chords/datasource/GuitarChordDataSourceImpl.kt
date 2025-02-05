@@ -2,8 +2,8 @@ package ru.muztache.core.data.local.chords.datasource
 
 import ru.muztache.core.data.GuitarChordQueries
 import ru.muztache.core.data.local.chords.entity.ChordEntity
-import ru.muztache.core.data.local.chords.mapper.toChordEntityList
-import ru.muztache.core.data.local.chords.mapper.toFretsString
+import ru.muztache.core.data.local.chords.mapper.toFretString
+import ru.muztache.core.data.local.chords.mapper.toGuitarChordEntityList
 
 class GuitarChordDataSourceImpl(
     private val queries: GuitarChordQueries
@@ -12,22 +12,22 @@ class GuitarChordDataSourceImpl(
     override suspend fun getAll(): List<ChordEntity> {
         return queries.selectAll()
             .executeAsList()
-            .toChordEntityList()
+            .toGuitarChordEntityList()
     }
 
     override suspend fun getByName(name: String): List<ChordEntity> {
         return queries.selectByName(name)
             .executeAsList()
-            .toChordEntityList()
+            .toGuitarChordEntityList()
     }
 
     override suspend fun getByNames(names: List<String>): List<ChordEntity> {
         return queries.selectByNames(names)
             .executeAsList()
-            .toChordEntityList()
+            .toGuitarChordEntityList()
     }
 
     override suspend fun insert(chord: ChordEntity) {
-        queries.insert(chord.name, chord.frets.toFretsString())
+        queries.insert(chord.name, chord.frets.toFretString())
     }
 }

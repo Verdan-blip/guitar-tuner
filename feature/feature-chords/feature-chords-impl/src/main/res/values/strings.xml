@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_chords_library">Библиотека аккордов</string>
+    <string name="basic_chords">Базовые аккорды</string>
+</resources>

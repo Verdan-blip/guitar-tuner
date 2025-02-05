@@ -1,18 +1,5 @@
 import java.net.URI
 
-include(":feature:feature-chords")
-
-
-include(":feature:feature-profile")
-
-
-include(":feature:feature-signin")
-
-
-include(":feature:feature-signup")
-
-
-
 pluginManagement {
     includeBuild("convention-plugins/base")
     repositories {
@@ -49,5 +36,10 @@ include(":core:core-util")
 
 include(":feature:feature-tuner:feature-tuner-impl")
 include(":feature:feature-tuner:feature-tuner-api")
+include(":feature:feature-chords:feature-chords-api")
+include(":feature:feature-chords:feature-chords-impl")
+include(":feature:feature-profile")
+include(":feature:feature-signin")
+include(":feature:feature-signup")
 include(":feature:feature-splash")
 include(":tarsos-dsp")

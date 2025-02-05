@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.muztache.feature.chords.impl.ui.ChordsScreen
 import ru.muztache.feature.profile.ui.ProfileScreen
 import ru.muztache.feature.tuner.impl.ui.TunerScreen
 import ru.muztache.guitartuner.navigation.BottomNavRoute
@@ -37,6 +38,12 @@ fun MuztacheBottomNavHost(
                 onNavigateToSignIn = {
                     navController.navigate(Route.SignIn)
                 },
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
+        composable<BottomNavRoute.Chords> {
+            ChordsScreen(
                 modifier = Modifier
                     .fillMaxSize()
             )
