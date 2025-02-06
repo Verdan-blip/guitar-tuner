@@ -6,11 +6,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
+import ru.muztache.core.common.provider.ResourceProvider
 import ru.muztache.feature.profile.ui.mvi.Event
 import ru.muztache.feature.profile.ui.mvi.State
 import ru.muztache.feature.profile.ui.route.ProfileRoute
 
-internal class ProfileViewModel : BaseViewModel<State, Event>() {
+internal class ProfileViewModel(
+    resourceProvider: ResourceProvider
+) : BaseViewModel<State, Event>(resourceProvider) {
 
     private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> get() = _state

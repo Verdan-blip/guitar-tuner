@@ -16,10 +16,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
+import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.entity.FetchRequest
 import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.core.theme.composable.progress.MuztacheProgressIndicator
 import ru.muztache.core.theme.composable.surface.MuztacheSurface
+import ru.muztache.core.theme.snackbar.LocalMuztacheSnackBar
 import ru.muztache.feature.chords.R
 import ru.muztache.feature.chords.impl.ui.composable.BasicChordsSection
 import ru.muztache.feature.chords.impl.ui.entity.ChordModel
@@ -41,10 +43,20 @@ fun ChordsScreen(
     )
 
     val lifecycleOwner = LocalLifecycleOwner.current
-    LaunchedEffect(lifecycleOwner.lifecycle) {
+    LaunchedEffect(lifecycleOwner.lifecycle.currentState) {
         when (lifecycleOwner.lifecycle.currentState) {
-            Lifecycle.State.CREATED -> {
+            Lifecycle.State.STARTED -> {
                 viewModel.reducer(Event.Load)
+            }
+            else -> Unit
+        }
+    }
+
+    val snackBarHost = LocalMuztacheSnackBar.current
+    LaunchedEffect(effect.value) {
+        when (val value = effect.value) {
+            is BaseEffect.ShowSnackBar -> {
+                snackBarHost.showSnackbar(value.message)
             }
             else -> Unit
         }

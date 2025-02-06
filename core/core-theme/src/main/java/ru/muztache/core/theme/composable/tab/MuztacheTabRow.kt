@@ -1,7 +1,7 @@
 package ru.muztache.core.theme.composable.tab
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.TabRow
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -14,7 +14,7 @@ fun MuztacheTabRow(
     selectedIndex: Int = 0,
     tabs: @Composable () -> Unit
 ) {
-    TabRow(
+    ScrollableTabRow(
         selectedTabIndex = selectedIndex,
         containerColor = Color.Transparent,
         indicator = { },

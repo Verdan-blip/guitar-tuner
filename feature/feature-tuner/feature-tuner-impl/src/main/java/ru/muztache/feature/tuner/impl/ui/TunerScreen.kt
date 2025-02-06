@@ -59,8 +59,8 @@ fun TunerScreen(modifier: Modifier = Modifier) {
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
-                Lifecycle.Event.ON_RESUME -> viewModel.onScreenVisible()
-                Lifecycle.Event.ON_PAUSE -> viewModel.onScreenInvisible()
+                Lifecycle.Event.ON_START -> viewModel.onScreenVisible()
+                Lifecycle.Event.ON_STOP -> viewModel.onScreenInvisible()
                 else -> Unit
             }
         }

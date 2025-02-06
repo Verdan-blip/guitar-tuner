@@ -7,6 +7,9 @@ import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
 import ru.muztache.core.common.entity.TextFieldState
+import ru.muztache.core.common.provider.ResourceProvider
+import ru.muztache.core.data.local.auth.exceptions.SignInException
+import ru.muztache.feature.signin.R
 import ru.muztache.feature.signin.domain.entity.UserForm
 import ru.muztache.feature.signin.domain.usecase.SignInUseCase
 import ru.muztache.feature.signin.ui.mvi.Event
@@ -14,8 +17,9 @@ import ru.muztache.feature.signin.ui.mvi.State
 import ru.muztache.feature.signin.ui.route.SignInRoute
 
 internal class SignInViewModel(
-    private val signUpUseCase: SignInUseCase
-) : BaseViewModel<State, Event>() {
+    private val signInUseCase: SignInUseCase,
+    resourceProvider: ResourceProvider
+) : BaseViewModel<State, Event>(resourceProvider) {
 
     private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> get() = _state
@@ -48,7 +52,10 @@ internal class SignInViewModel(
     private fun onSubmit() {
         viewModelScope.launch {
             _state.value.apply {
-                signUpUseCase(UserForm(email.value, password.value))
+                doSafeCall(onException = ::onSignInException) {
+                    signInUseCase(UserForm(email.value, password.value))
+                    emitBaseEffect(BaseEffect.NavigateTo(SignInRoute.Profile))
+                }
             }
         }
     }
@@ -57,5 +64,20 @@ internal class SignInViewModel(
         viewModelScope.launch {
             emitBaseEffect(BaseEffect.NavigateTo(SignInRoute.SignUp))
         }
+    }
+
+    private suspend fun onSignInException(ex: Exception) {
+        val message = when (ex) {
+            is SignInException.InvalidCredentials -> {
+                getProvidedString(R.string.error_invalid_credentials)
+            }
+            is SignInException.FailedToSignIn -> {
+                getProvidedString(R.string.error_failed_to_sign_in)
+            }
+            else -> {
+                getProvidedString(ru.muztache.core.common.R.string.unknown_error)
+            }
+        }
+        emitBaseEffect(BaseEffect.ShowSnackBar(message))
     }
 }

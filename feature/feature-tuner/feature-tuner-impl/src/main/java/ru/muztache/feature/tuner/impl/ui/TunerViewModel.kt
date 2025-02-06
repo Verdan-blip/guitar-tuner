@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.muztache.core.common.base.viewmodel.BaseNavigableViewModel
+import ru.muztache.core.common.base.viewmodel.BaseViewModel
+import ru.muztache.core.common.provider.ResourceProvider
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.AnalyzeResult
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.FrequencyAnalyzer
 import ru.muztache.feature.tuner.impl.ui.engine.processor.pitch.FrequencyProcessor
@@ -17,8 +18,9 @@ import ru.muztache.feature.tuner.impl.ui.mvi.TunerState
 
 class TunerViewModel(
     private val frequencyProcessor: FrequencyProcessor,
-    private val frequencyAnalyzer: FrequencyAnalyzer
-) : BaseNavigableViewModel<TunerState, TunerEvent>() {
+    private val frequencyAnalyzer: FrequencyAnalyzer,
+    resourceProvider: ResourceProvider
+) : BaseViewModel<TunerState, TunerEvent>(resourceProvider) {
 
     private val _state = MutableStateFlow(TunerState.create())
     override val state: StateFlow<TunerState> get() = _state

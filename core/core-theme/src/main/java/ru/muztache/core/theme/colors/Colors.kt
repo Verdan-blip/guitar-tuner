@@ -11,6 +11,7 @@ data class ColorScheme(
     val textUnselected: Color,
     val surface: Color,
     val background: Color,
+    val error: Color,
     val border: Color,
     val neutral: Color,
     val reference: Color
@@ -24,6 +25,7 @@ val muztacheLightColorScheme: ColorScheme = ColorScheme(
     textUnselected = Color(0xFFBEBEBE),
     surface = Color(0xFFFFFFFF),
     background = Color(0xFFF2F2F2),
+    error = Color(0xFFD9534F),
     border = Color(0xFF000000),
     neutral = Color(0xFFB4B4B4),
     reference = Color(0xFF288CE9)
@@ -37,6 +39,7 @@ val muztacheDarkColorScheme: ColorScheme = ColorScheme(
     textUnselected = Color(0xFFBEBEBE),
     surface = Color(0xFFE6E6E6),
     background = Color(0xFFF2F2F2),
+    error = Color(0xFFD9534F),
     border = Color(0xFF000000),
     neutral = Color(0xFFB4B4B4),
     reference = Color(0xFF288CE9)

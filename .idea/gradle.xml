@@ -25,11 +25,14 @@
             <option value="$PROJECT_DIR$/convention-plugins/base" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/core-common" />
-            <option value="$PROJECT_DIR$/core/core-data" />
+            <option value="$PROJECT_DIR$/core/core-data-api" />
+            <option value="$PROJECT_DIR$/core/core-data-impl" />
             <option value="$PROJECT_DIR$/core/core-theme" />
             <option value="$PROJECT_DIR$/core/core-util" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/feature-chords" />
+            <option value="$PROJECT_DIR$/feature/feature-chords/feature-chords-api" />
+            <option value="$PROJECT_DIR$/feature/feature-chords/feature-chords-impl" />
             <option value="$PROJECT_DIR$/feature/feature-profile" />
             <option value="$PROJECT_DIR$/feature/feature-signin" />
             <option value="$PROJECT_DIR$/feature/feature-signup" />

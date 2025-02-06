@@ -24,8 +24,7 @@ dependencies {
 
     //Common modules
     projectImplementation(project(":core:core-common"))
-    projectImplementation(project(":core:core-data"))
-    projectImplementation(project(":core:core-data"))
+    projectImplementation(project(":core:core-data-api"))
     projectImplementation(project(":core:core-theme"))
     projectImplementation(project(":core:core-util"))
 

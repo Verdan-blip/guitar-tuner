@@ -1,10 +1,13 @@
 package ru.muztache.core.theme.composable.field
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.VisualTransformation
@@ -20,37 +23,55 @@ fun MuztacheTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     placeholder: String
 ) {
-    OutlinedTextField(
-        value = textFieldState.value,
-        onValueChange = onValueChange,
-        visualTransformation = visualTransformation,
-        isError = textFieldState is TextFieldState.Error,
-        shape = RoundedCornerShape(MuztacheTheme.corners.extraLarge),
-        textStyle = MuztacheTheme.typography.bodyMedium,
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            focusedIndicatorColor = MuztacheTheme.colors.primary,
-            unfocusedIndicatorColor = MuztacheTheme.colors.neutral
-        ),
-        placeholder = {
-            Text(
-                text = placeholder,
-                style = MuztacheTheme.typography.bodyMedium
-            )
-        },
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-    )
+    ) {
+        OutlinedTextField(
+            value = textFieldState.value,
+            onValueChange = onValueChange,
+            visualTransformation = visualTransformation,
+            isError = textFieldState is TextFieldState.Error,
+            shape = RoundedCornerShape(MuztacheTheme.corners.extraLarge),
+            textStyle = MuztacheTheme.typography.bodyMedium,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = MuztacheTheme.colors.primary,
+                unfocusedIndicatorColor = MuztacheTheme.colors.neutral
+            ),
+            placeholder = {
+                Text(
+                    text = placeholder,
+                    style = MuztacheTheme.typography.bodyMedium
+                )
+            },
+            supportingText = if (textFieldState is TextFieldState.Error) {
+                @Composable {
+                    Text(
+                        text = textFieldState.message,
+                        style = MuztacheTheme.typography.labelSmall
+                    )
+                }
+            } else {
+                null
+            }
+        )
+    }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun MuztacheTextFieldPreview() {
     MuztacheTheme {
         MuztacheTextField(
-            textFieldState = TextFieldState.Idle(""),
+            textFieldState = TextFieldState.Idle(
+                "",
+            ),
             onValueChange = { },
-            placeholder = "Почта"
+            placeholder = "Почта",
+            modifier = Modifier
+                .fillMaxWidth()
         )
     }
 }

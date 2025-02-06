@@ -13,13 +13,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import ru.muztache.core.common.base.mvi.BaseEffect
+import ru.muztache.core.common.entity.TextFieldState
 import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.core.theme.composable.button.MuztacheTextButton
 import ru.muztache.core.theme.composable.field.MuztacheTextField
+import ru.muztache.core.theme.snackbar.LocalMuztacheSnackBar
 import ru.muztache.feature.signup.R
 import ru.muztache.feature.signup.ui.mvi.Event
 import ru.muztache.feature.signup.ui.mvi.State
@@ -41,6 +44,7 @@ fun SignUpScreen(
         modifier = modifier
     )
 
+    val snackBarHost = LocalMuztacheSnackBar.current
     LaunchedEffect(effect.value) {
         when (val value = effect.value) {
             is BaseEffect.NavigateTo -> {
@@ -52,6 +56,9 @@ fun SignUpScreen(
                         onNavigateToSignIn()
                     }
                 }
+            }
+            is BaseEffect.ShowSnackBar -> {
+                snackBarHost.showSnackbar(value.message)
             }
             else -> Unit
         }
@@ -109,6 +116,7 @@ private fun SignUpScreenContent(
                 textFieldState = state.password,
                 onValueChange = { value -> onEvent(Event.PasswordChange(value)) },
                 placeholder = stringResource(R.string.hint_password),
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MuztacheTheme.paddings.medium)
@@ -117,6 +125,7 @@ private fun SignUpScreenContent(
                 textFieldState = state.confirmedPassword,
                 onValueChange = { value -> onEvent(Event.ConfirmedPasswordChange(value)) },
                 placeholder = stringResource(R.string.hint_confirmed_password),
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MuztacheTheme.paddings.medium)
@@ -125,8 +134,7 @@ private fun SignUpScreenContent(
                 onClick = { onEvent(Event.OnSubmit) },
                 text = stringResource(R.string.create_account),
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = MuztacheTheme.paddings.medium)
+                    .padding(top = MuztacheTheme.paddings.large)
             )
         }
     }
@@ -137,7 +145,9 @@ private fun SignUpScreenContent(
 private fun SignUpScreenPreview() {
     MuztacheTheme {
         SignUpScreenContent(
-            state = State(),
+            state = State(
+                email = TextFieldState.Error("sample", "Adsjfsdkjfjsdjkfdkjh kvdkfjdkj djfdkfjdkj dfkdjkf")
+            ),
             onEvent = { },
             modifier = Modifier
                 .fillMaxSize()

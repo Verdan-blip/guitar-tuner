@@ -1,7 +1,9 @@
 package ru.muztache.core.theme
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import ru.muztache.core.theme.colors.ColorScheme
 import ru.muztache.core.theme.colors.LocalMuztacheColors
 import ru.muztache.core.theme.colors.muztacheDarkColorScheme
@@ -12,6 +14,7 @@ import ru.muztache.core.theme.corners.muztacheCorners
 import ru.muztache.core.theme.paddings.LocalMuztachePaddings
 import ru.muztache.core.theme.paddings.muztachePaddings
 import ru.muztache.core.theme.paddings.Paddings
+import ru.muztache.core.theme.snackbar.LocalMuztacheSnackBar
 import ru.muztache.core.theme.typo.LocalMuztacheTypography
 import ru.muztache.core.theme.typo.Typography
 import ru.muztache.core.theme.typo.muztacheTypography
@@ -29,12 +32,14 @@ fun MuztacheTheme(
     val paddings = muztachePaddings
     val typography = muztacheTypography
     val corners = muztacheCorners
+    val snackBarState = remember { SnackbarHostState() }
 
     CompositionLocalProvider(
         LocalMuztacheColors provides colorScheme,
         LocalMuztacheTypography provides typography,
         LocalMuztachePaddings provides paddings,
         LocalMuztacheCorners provides corners,
+        LocalMuztacheSnackBar provides snackBarState,
         content = content
     )
 }
@@ -52,4 +57,7 @@ object MuztacheTheme {
 
     val corners: Corners
         @Composable get() = LocalMuztacheCorners.current
+
+    val snackBarHost: SnackbarHostState
+        @Composable get() = LocalMuztacheSnackBar.current
 }

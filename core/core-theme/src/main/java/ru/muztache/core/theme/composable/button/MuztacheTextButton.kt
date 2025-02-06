@@ -30,7 +30,7 @@ fun MuztacheTextButton(
             text = text,
             style = MuztacheTheme.typography.labelLarge,
             modifier = Modifier
-                .padding(all = MuztacheTheme.paddings.medium + MuztacheTheme.paddings.small)
+                .padding(all = MuztacheTheme.paddings.medium + MuztacheTheme.paddings.extraSmall)
         )
     }
 }

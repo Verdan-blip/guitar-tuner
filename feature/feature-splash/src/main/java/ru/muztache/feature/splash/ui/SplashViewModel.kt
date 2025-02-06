@@ -6,6 +6,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
+import ru.muztache.core.common.provider.ResourceProvider
+import ru.muztache.feature.chords.api.FeatureChordsApi
+import ru.muztache.feature.chords.api.domain.entity.Chord
 import ru.muztache.feature.splash.ui.mvi.SplashEvent
 import ru.muztache.feature.splash.ui.mvi.SplashState
 import ru.muztache.feature.splash.ui.route.SplashScreenRoute
@@ -15,7 +18,9 @@ import ru.muztache.feature.tuner.api.domain.entity.instrument.Ukulele
 
 class SplashViewModel(
     private val tunerApi: FeatureTunerApi,
-) : BaseViewModel<SplashState, SplashEvent>() {
+    private val chordsApi: FeatureChordsApi,
+    resourceProvider: ResourceProvider
+) : BaseViewModel<SplashState, SplashEvent>(resourceProvider) {
 
     private val _state = MutableStateFlow(SplashState.create())
     override val state: StateFlow<SplashState> get() = _state
@@ -32,6 +37,7 @@ class SplashViewModel(
                 val syncJob = launch {
                     launch { saveGuitars(tunerApi.getReservedGuitarsUseCase()) }
                     launch { saveUkuleles(tunerApi.getReservedUkulelesUseCase()) }
+                    launch { saveGuitarChords(chordsApi.getReservedGuitarChordsUseCase()) }
                 }
                 syncJob.invokeOnCompletion {
                     launch { emitBaseEffect(BaseEffect.NavigateTo(SplashScreenRoute.HomeScreen)) }
@@ -50,5 +56,9 @@ class SplashViewModel(
         ukuleles.forEach { (name, ukulele) ->
             tunerApi.saveUkuleleUseCase(name, ukulele)
         }
+    }
+
+    private suspend fun saveGuitarChords(chords: List<Chord>) {
+        chordsApi.saveGuitarChordUseCase(chords)
     }
 }

@@ -94,7 +94,7 @@ datastore = { group = "androidx.datastore", name = "datastore", version.ref = "d
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf-protoc" }
 protobuf-javalite = { group = "com.google.protobuf", name = "protobuf-javalite", version.ref = "protobuf-javalite" }
 
-sqldelight = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
+sqldelight = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }
 
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 androidx-animation-graphics-android = { group = "androidx.compose.animation", name = "animation-graphics-android", version.ref = "animationGraphicsAndroid" }

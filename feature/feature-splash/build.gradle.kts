@@ -16,5 +16,6 @@ android {
 
 dependencies {
     implementation(project(":feature:feature-tuner:feature-tuner-api"))
+    implementation(project(":feature:feature-chords:feature-chords-api"))
     implementation(libs.androidx.core.splashscreen)
 }

@@ -13,7 +13,7 @@ class SignUpUseCase(
 
     suspend operator fun invoke(userForm: UserForm) {
         withContext(dispatcher) {
-            authRepository.createUser(userForm.toDataUserForm())
+            authRepository.signUp(userForm.toDataUserForm())
         }
     }
 }

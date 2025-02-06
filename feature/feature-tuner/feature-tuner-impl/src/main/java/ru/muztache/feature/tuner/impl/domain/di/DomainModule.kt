@@ -4,15 +4,15 @@ import org.koin.dsl.module
 import ru.muztache.core.common.di.iODispatcherQualifier
 import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar
 import ru.muztache.feature.tuner.api.domain.entity.instrument.Ukulele
-import ru.muztache.feature.tuner.api.domain.usecase.get.reserved.GetReservedGuitarsUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.get.reserved.GetReservedInstrumentsUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.get.reserved.GetReservedUkulelesUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.get.tuned.GetTunedGuitarsUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.get.tuned.GetTunedInstrumentsUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.get.tuned.GetTunedUkulelesUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.save.SaveGuitarUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.get.GetReservedGuitarsUseCase
+import ru.muztache.feature.tuner.api.domain.usecase.get.GetReservedInstrumentsUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.get.GetReservedUkulelesUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.get.GetTunedGuitarsUseCase
+import ru.muztache.feature.tuner.api.domain.usecase.get.GetTunedInstrumentsUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.get.GetTunedUkulelesUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.save.SaveGuitarUseCase
 import ru.muztache.feature.tuner.api.domain.usecase.save.SaveInstrumentUseCase
-import ru.muztache.feature.tuner.api.domain.usecase.save.SaveUkuleleUseCase
+import ru.muztache.feature.tuner.impl.domain.usecase.save.SaveUkuleleUseCase
 import ru.muztache.feature.tuner.impl.data.di.guitarQualifier
 import ru.muztache.feature.tuner.impl.data.di.ukuleleQualifier
 

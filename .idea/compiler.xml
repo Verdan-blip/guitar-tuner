@@ -5,6 +5,7 @@
       <module name="guitar-tuner.core-common" target="21" />
       <module name="guitar-tuner.core-data" target="21" />
       <module name="guitar-tuner.core-theme" target="21" />
+      <module name="guitar-tuner.core.core-data.core-data-api" target="21" />
       <module name="guitar-tuner.feature-tuner.feature-tuner-impl" target="21" />
     </bytecodeTargetLevel>
   </component>

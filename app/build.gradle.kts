@@ -46,7 +46,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:core-data"))
+    implementation(project(":core:core-data-api"))
+    implementation(project(":core:core-data-impl"))
     implementation(project(":core:core-common"))
     implementation(project(":core:core-util"))
     implementation(project(":core:core-theme"))

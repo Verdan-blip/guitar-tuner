@@ -8,6 +8,7 @@ import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
 import ru.muztache.core.common.entity.TextFieldState
 import ru.muztache.core.common.provider.ResourceProvider
+import ru.muztache.core.data.local.auth.exceptions.SignUpException
 import ru.muztache.feature.signup.R
 import ru.muztache.feature.signup.domain.entity.UserForm
 import ru.muztache.feature.signup.domain.exceptions.ValidationException
@@ -20,8 +21,8 @@ import ru.muztache.feature.signup.ui.route.SignUpRoute
 internal class SignUpViewModel(
     private val signUpUseCase: SignUpUseCase,
     private val validateFormInteractor: ValidateFormInteractor,
-    private val resourceProvider: ResourceProvider
-) : BaseViewModel<State, Event>() {
+    resourceProvider: ResourceProvider
+) : BaseViewModel<State, Event>(resourceProvider) {
 
     private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> get() = _state
@@ -63,8 +64,11 @@ internal class SignUpViewModel(
     private fun onSubmit() {
         viewModelScope.launch {
             _state.value.apply {
-                validateFields(email.value, password.value, confirmedPassword.value)
-                signUpUseCase(UserForm(email.value, password.value))
+                doSafeCall(onException = ::onSubmitException) {
+                    validateFields(email.value, password.value, confirmedPassword.value)
+                    signUpUseCase(UserForm(email.value, password.value))
+                    emitBaseEffect(BaseEffect.NavigateTo(SignUpRoute.Profile))
+                }
             }
         }
     }
@@ -80,47 +84,69 @@ internal class SignUpViewModel(
         password: String,
         confirmedPassword: String
     ) {
-        safeValidationCall {
-            validateFormInteractor.apply {
-                validateEmail(email)
-                validatePassword(password)
-                validatePasswordsMatch(password, confirmedPassword)
+        validateFormInteractor.apply {
+            validateEmail(email)
+            validatePassword(password)
+            validatePasswordsMatch(password, confirmedPassword)
+        }
+    }
+
+    private suspend fun onSubmitException(ex: Exception) {
+        when (ex) {
+            is ValidationException -> onValidationException(ex)
+            else -> onSignInException(ex)
+        }
+    }
+
+    private suspend fun onValidationException(ex: Exception) {
+        _state.apply {
+            when (ex) {
+                is ValidationException.InvalidEmailFormat -> {
+                    _state.emit(
+                        value.copy(
+                            email = TextFieldState.Error(
+                                value = value.email.value,
+                                message = getProvidedString(R.string.invalid_email_format)
+                            )
+                        )
+                    )
+                }
+                is ValidationException.InvalidPasswordFormat -> {
+                    _state.emit(
+                        value.copy(
+                            password = TextFieldState.Error(
+                                value = "",
+                                message = getProvidedString(R.string.insecure_password)
+                            )
+                        )
+                    )
+                }
+                is ValidationException.PasswordsNotMatch -> {
+                    _state.emit(
+                        value.copy(
+                            password = TextFieldState.Error(
+                                value = "",
+                                message = getProvidedString(R.string.passwords_does_not_match)
+                            )
+                        )
+                    )
+                }
             }
         }
     }
 
-    private suspend fun safeValidationCall(body: suspend () -> Unit) {
-        try {
-            body()
-        } catch (ex: Exception) {
-            _state.apply {
-                when (ex) {
-                    is ValidationException.InvalidEmailFormat -> {
-                        _state.emit(value.copy(
-                            email = TextFieldState.Error(
-                                value = value.email.value,
-                                message = resourceProvider.getString(R.string.invalid_email_format)
-                            )
-                        ))
-                    }
-                    is ValidationException.InvalidPasswordFormat -> {
-                        _state.emit(value.copy(
-                            password = TextFieldState.Error(
-                                value = "",
-                                message = resourceProvider.getString(R.string.insecure_password)
-                            )
-                        ))
-                    }
-                    is ValidationException.PasswordsNotMatch -> {
-                        _state.emit(value.copy(
-                            password = TextFieldState.Error(
-                                value = "",
-                                message = resourceProvider.getString(R.string.passwords_does_not_match)
-                            )
-                        ))
-                    }
-                }
+    private suspend fun onSignInException(ex: Exception) {
+        val message = when (ex) {
+            is SignUpException.SuchUserAlreadyExists -> {
+                getProvidedString(R.string.error_such_user_already_exists)
+            }
+            is SignUpException.FailedToCreateUser -> {
+                getProvidedString(R.string.error_failed_to_sign_up)
+            }
+            else -> {
+                getProvidedString(ru.muztache.core.common.R.string.unknown_error)
             }
         }
+        emitBaseEffect(BaseEffect.ShowSnackBar(message))
     }
 }

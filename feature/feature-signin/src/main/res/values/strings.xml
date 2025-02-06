@@ -6,4 +6,6 @@
     <string name="if_you_already_have_an_account">Если у Вас уже есть аккаунт, то</string>
     <string name="signin">Войти</string>
     <string name="click_here">Нажмите здесь</string>
+    <string name="error_invalid_credentials">Неверные почта или пароль</string>
+    <string name="error_failed_to_sign_in">Не удалось авторизоваться. Повторите попытку позже</string>
 </resources>

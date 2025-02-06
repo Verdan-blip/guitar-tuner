@@ -6,14 +6,16 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
 import ru.muztache.core.common.entity.FetchRequest
-import ru.muztache.feature.chords.api.domain.usecase.GetBaseGuitarChordsUseCase
+import ru.muztache.core.common.provider.ResourceProvider
+import ru.muztache.feature.chords.api.domain.usecase.GetBasicChordsUseCase
 import ru.muztache.feature.chords.impl.ui.mapper.toChordModelList
 import ru.muztache.feature.chords.impl.ui.mvi.Event
 import ru.muztache.feature.chords.impl.ui.mvi.State
 
 internal class ChordsViewModel(
-    private val getBaseGuitarChordsUseCase: GetBaseGuitarChordsUseCase
-) : BaseViewModel<State, Event>() {
+    private val getBasicChordsUseCase: GetBasicChordsUseCase,
+    resourceProvider: ResourceProvider
+) : BaseViewModel<State, Event>(resourceProvider) {
 
     private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> get() = _state
@@ -26,15 +28,15 @@ internal class ChordsViewModel(
 
     private fun onLoad() {
         viewModelScope.launch {
-            val baseChords = doSafeCall(
-                onException = { ex ->
-                    FetchRequest.Failure(ex)
-                },
-                body = {
-                    FetchRequest.Success(getBaseGuitarChordsUseCase().toChordModelList())
-                }
-            )
-            _state.emit(_state.value.copy(baseChords = baseChords))
+            _state.emit(_state.value.copy(baseChords = FetchRequest.Pending))
+            doSafeCall(onException = ::onLoadException) {
+                val basicChords = getBasicChordsUseCase().toChordModelList()
+                _state.emit(_state.value.copy(baseChords = FetchRequest.Success(basicChords)))
+            }
         }
+    }
+
+    private suspend fun onLoadException(ex: Exception) {
+        _state.emit(_state.value.copy(baseChords = FetchRequest.Failure(ex)))
     }
 }

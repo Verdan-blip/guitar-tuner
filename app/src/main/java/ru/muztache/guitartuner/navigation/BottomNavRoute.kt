@@ -22,10 +22,10 @@ sealed interface BottomNavRoute {
 
 val bottomNavigationItems: List<BottomNavItem> @Composable get() = listOf(
     BottomNavItem(
-        ImageVector.vectorResource(R.drawable.ic_tuner24), BottomNavRoute.Tuner
+        ImageVector.vectorResource(R.drawable.ic_chords_24), BottomNavRoute.Chords
     ),
     BottomNavItem(
-        ImageVector.vectorResource(R.drawable.ic_chords_24), BottomNavRoute.Chords
+        ImageVector.vectorResource(R.drawable.ic_tuner24), BottomNavRoute.Tuner
     ),
     BottomNavItem(
         ImageVector.vectorResource(R.drawable.ic_person_24), BottomNavRoute.Profile

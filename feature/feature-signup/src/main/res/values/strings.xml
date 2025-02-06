@@ -7,7 +7,9 @@
     <string name="hint_confirmed_password">Подтвердите</string>
     <string name="create_account">Создать аккаунт</string>
     <string name="click_here">Нажмите здесь</string>
-    <string name="invalid_email_format">Почта не соответствтует</string>
+    <string name="invalid_email_format">Почта не соответствует формату</string>
     <string name="insecure_password">Пароль должен состоять не мене из 8 символов, содержать заглавные и строчные буквы и цифры</string>
     <string name="passwords_does_not_match">Пароли не совпадают</string>
+    <string name="error_such_user_already_exists">Такой пользователь уже существует</string>
+    <string name="error_failed_to_sign_up">Не удалось зарегистрироваться. Повторите попытку позже</string>
 </resources>

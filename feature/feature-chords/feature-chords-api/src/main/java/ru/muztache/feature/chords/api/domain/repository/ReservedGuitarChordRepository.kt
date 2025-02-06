@@ -4,5 +4,5 @@ import ru.muztache.feature.chords.api.domain.entity.Chord
 
 interface ReservedGuitarChordRepository {
 
-    suspend fun getBasicChords(): List<Chord>
+    suspend fun getChords(): List<Chord>
 }

@@ -1,5 +1,8 @@
 import java.net.URI
 
+include(":core:core-data-impl")
+
+
 pluginManagement {
     includeBuild("convention-plugins/base")
     repositories {
@@ -30,7 +33,7 @@ rootProject.name = "guitar-tuner"
 
 include(":app")
 include(":core:core-common")
-include(":core:core-data")
+include(":core:core-data-api")
 include(":core:core-theme")
 include(":core:core-util")
 

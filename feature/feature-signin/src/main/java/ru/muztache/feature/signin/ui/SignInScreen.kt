@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
@@ -20,6 +21,7 @@ import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.core.theme.composable.button.MuztacheTextButton
 import ru.muztache.core.theme.composable.field.MuztacheTextField
+import ru.muztache.core.theme.snackbar.LocalMuztacheSnackBar
 import ru.muztache.feature.signin.R
 import ru.muztache.feature.signin.ui.mvi.Event
 import ru.muztache.feature.signin.ui.mvi.State
@@ -41,6 +43,7 @@ fun SignInScreen(
         modifier = modifier
     )
 
+    val snackBarState = LocalMuztacheSnackBar.current
     LaunchedEffect(effect.value) {
         when (val value = effect.value) {
             is BaseEffect.NavigateTo -> {
@@ -52,6 +55,9 @@ fun SignInScreen(
                         onNavigateToSignUp()
                     }
                 }
+            }
+            is BaseEffect.ShowSnackBar -> {
+                snackBarState.showSnackbar(value.message)
             }
             else -> Unit
         }
@@ -109,6 +115,7 @@ private fun SignInScreenContent(
                 textFieldState = state.password,
                 onValueChange = { value -> onEvent(Event.PasswordChange(value)) },
                 placeholder = stringResource(R.string.hint_password),
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MuztacheTheme.paddings.medium)
