@@ -3,10 +3,10 @@ package ru.muztache.feature.tuner.impl.data.mapper
 import ru.muztache.feature.tuner.impl.data.entity.Tone
 import ru.muztache.feature.tuner.impl.data.entity.ToneWithOctave
 
-typealias DomainToneWithOctave = ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
-typealias DomainTone =  ru.muztache.feature.tuner.api.domain.entity.tone.Tone
+internal typealias DomainToneWithOctave = ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
+internal typealias DomainTone =  ru.muztache.feature.tuner.api.domain.entity.tone.Tone
 
-fun Tone.toDomainTone(): DomainTone {
+internal fun Tone.toDomainTone(): DomainTone {
     return when (this) {
         Tone.A -> DomainTone.A
         Tone.A_DIES -> DomainTone.A_DIES
@@ -25,7 +25,7 @@ fun Tone.toDomainTone(): DomainTone {
 }
 
 
-fun DomainTone.toTone(): Tone {
+internal fun DomainTone.toTone(): Tone {
     return when (this) {
         DomainTone.A -> Tone.A
         DomainTone.A_DIES -> Tone.A_DIES

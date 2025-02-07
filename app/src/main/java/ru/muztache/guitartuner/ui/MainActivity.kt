@@ -27,12 +27,10 @@ class MainActivity : BaseActivity() {
                     snackbarHost = {
                         SnackbarHost(hostState = LocalMuztacheSnackBar.current)
                     },
-                ) { innerPaddings ->
+                ) { _ ->
                     MuztacheNavHost(
                         navController = navController,
-                        startDestination = Route.Splash,
-                        modifier = Modifier
-                            .padding(innerPaddings)
+                        startDestination = Route.Splash
                     )
                 }
             }

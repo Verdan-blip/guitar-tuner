@@ -14,6 +14,9 @@ import ru.muztache.core.theme.corners.muztacheCorners
 import ru.muztache.core.theme.paddings.LocalMuztachePaddings
 import ru.muztache.core.theme.paddings.muztachePaddings
 import ru.muztache.core.theme.paddings.Paddings
+import ru.muztache.core.theme.sizes.LocalMuztacheSizes
+import ru.muztache.core.theme.sizes.Sizes
+import ru.muztache.core.theme.sizes.muztacheSizes
 import ru.muztache.core.theme.snackbar.LocalMuztacheSnackBar
 import ru.muztache.core.theme.typo.LocalMuztacheTypography
 import ru.muztache.core.theme.typo.Typography
@@ -33,6 +36,7 @@ fun MuztacheTheme(
     val typography = muztacheTypography
     val corners = muztacheCorners
     val snackBarState = remember { SnackbarHostState() }
+    val sizes = muztacheSizes
 
     CompositionLocalProvider(
         LocalMuztacheColors provides colorScheme,
@@ -40,6 +44,7 @@ fun MuztacheTheme(
         LocalMuztachePaddings provides paddings,
         LocalMuztacheCorners provides corners,
         LocalMuztacheSnackBar provides snackBarState,
+        LocalMuztacheSizes provides sizes,
         content = content
     )
 }
@@ -60,4 +65,7 @@ object MuztacheTheme {
 
     val snackBarHost: SnackbarHostState
         @Composable get() = LocalMuztacheSnackBar.current
+
+    val sizes: Sizes
+        @Composable get() = LocalMuztacheSizes.current
 }

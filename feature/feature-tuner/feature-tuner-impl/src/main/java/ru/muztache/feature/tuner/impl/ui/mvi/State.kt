@@ -8,19 +8,20 @@ import ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
 import ru.muztache.feature.tuner.api.domain.entity.tuning.GuitarTuning
 import ru.muztache.feature.tuner.api.domain.entity.tuning.Tuning
 
-data class TunerState(
+internal data class State(
     val isEnabled: Boolean,
     val isAutoDetect: Boolean,
     val selectedInstrument: StringInstrument<out Tuning>,
     val idolNote: ToneWithOctave,
     val currentFrequency: Float,
     val selectedString: Int,
-    val isTuned: Boolean
+    val isTuned: Boolean,
+    val shouldRequestPermission: Boolean
 ) : BaseState {
 
     companion object {
 
-        fun create(): TunerState {
+        fun create(): State {
             val instrument = Guitar(
                 GuitarTuning(
                     string1 = ToneWithOctave(Tone.E, 4),
@@ -32,14 +33,15 @@ data class TunerState(
                 )
             )
             val currentString = 0
-            return TunerState(
+            return State(
                 isEnabled = false,
                 isAutoDetect = false,
                 selectedInstrument = instrument,
                 idolNote = instrument.getToneWithOctave(currentString),
                 selectedString = currentString,
                 currentFrequency = 0f,
-                isTuned = false
+                isTuned = false,
+                shouldRequestPermission = false
             )
         }
     }

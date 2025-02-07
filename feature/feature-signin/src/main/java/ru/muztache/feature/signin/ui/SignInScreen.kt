@@ -124,7 +124,6 @@ private fun SignInScreenContent(
                 onClick = { onEvent(Event.Submit) },
                 text = stringResource(R.string.signin),
                 modifier = Modifier
-                    .fillMaxWidth()
                     .padding(top = MuztacheTheme.paddings.medium)
             )
         }

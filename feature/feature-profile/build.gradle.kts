@@ -1,3 +1,5 @@
+import ru.muztache.conventionplugins.base.extensions.implementation
+
 plugins {
     id("base.feature.dependencies")
     id("base.feature.config")
@@ -12,5 +14,5 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.coil)
 }

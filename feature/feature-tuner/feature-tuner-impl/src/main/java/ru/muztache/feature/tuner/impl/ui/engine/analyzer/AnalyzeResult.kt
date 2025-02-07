@@ -1,9 +1,9 @@
 package ru.muztache.feature.tuner.impl.ui.engine.analyzer
 
 import ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
-import ru.muztache.feature.tuner.impl.ui.entity.math.Deviation
+import ru.muztache.feature.tuner.impl.ui.entity.Deviation
 
-sealed class AnalyzeResult(val frequency: Float) {
+internal sealed class AnalyzeResult(val frequency: Float) {
 
     class Success(
         val nearestTone: ToneWithOctave,

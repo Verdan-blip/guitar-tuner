@@ -4,9 +4,9 @@ import ru.muztache.feature.tuner.api.domain.entity.instrument.Ukulele
 import ru.muztache.feature.tuner.api.domain.entity.tuning.UkuleleTuning
 import ru.muztache.feature.tuner.impl.data.entity.TunedUkulele
 
-typealias ProtoTunedUkulele = TunedUkulele
+internal typealias ProtoTunedUkulele = TunedUkulele
 
-fun ProtoTunedUkulele.toUkulele(): Ukulele = Ukulele(
+internal fun ProtoTunedUkulele.toUkulele(): Ukulele = Ukulele(
     tuning = UkuleleTuning(
         string1.toDomainToneWithOctave(),
         string2.toDomainToneWithOctave(),
@@ -15,7 +15,7 @@ fun ProtoTunedUkulele.toUkulele(): Ukulele = Ukulele(
     )
 )
 
-fun Ukulele.toProtoTunedUkulele(): ProtoTunedUkulele = ProtoTunedUkulele.newBuilder()
+internal fun Ukulele.toProtoTunedUkulele(): ProtoTunedUkulele = ProtoTunedUkulele.newBuilder()
     .setString1(tuning.string1.toToneWithOctave())
     .setString2(tuning.string2.toToneWithOctave())
     .setString3(tuning.string3.toToneWithOctave())

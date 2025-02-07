@@ -31,11 +31,10 @@ protobuf {
 }
 
 dependencies {
-
     implementation(project(":feature:feature-tuner:feature-tuner-api"))
+    implementation(project(":tarsos-dsp"))
     implementation(libs.datastore.preferences)
     implementation(libs.datastore)
     implementation(libs.protobuf.javalite)
-
-    implementation(project(":tarsos-dsp"))
+    implementation(libs.permission)
 }

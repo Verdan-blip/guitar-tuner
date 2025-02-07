@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="we_need_permission_to_microphone">Чтобы пользоваться тюнером, необходимо дать доступ к микрофону</string>
+    <string name="give_permission">Дать разрешение</string>
+    <string name="provide_permission_via_settings">Наше приложение больше не может запрашивать разрешение. Перейдите в настройки</string>
+</resources>

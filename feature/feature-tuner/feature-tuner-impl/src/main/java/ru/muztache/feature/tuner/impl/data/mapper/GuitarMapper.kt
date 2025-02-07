@@ -4,9 +4,9 @@ import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar
 import ru.muztache.feature.tuner.api.domain.entity.tuning.GuitarTuning
 import ru.muztache.feature.tuner.impl.data.entity.TunedGuitar
 
-typealias ProtoTunedGuitar = TunedGuitar
+internal typealias ProtoTunedGuitar = TunedGuitar
 
-fun ProtoTunedGuitar.toGuitar(): Guitar = Guitar(
+internal fun ProtoTunedGuitar.toGuitar(): Guitar = Guitar(
     tuning = GuitarTuning(
         string1.toDomainToneWithOctave(),
         string2.toDomainToneWithOctave(),
@@ -17,7 +17,7 @@ fun ProtoTunedGuitar.toGuitar(): Guitar = Guitar(
     )
 )
 
-fun Guitar.toProtoTunedGuitar(): ProtoTunedGuitar = ProtoTunedGuitar.newBuilder()
+internal fun Guitar.toProtoTunedGuitar(): ProtoTunedGuitar = ProtoTunedGuitar.newBuilder()
     .setString1(tuning.string1.toToneWithOctave())
     .setString2(tuning.string2.toToneWithOctave())
     .setString3(tuning.string3.toToneWithOctave())

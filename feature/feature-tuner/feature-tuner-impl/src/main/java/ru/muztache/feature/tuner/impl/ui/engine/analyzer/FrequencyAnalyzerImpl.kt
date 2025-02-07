@@ -3,10 +3,10 @@ package ru.muztache.feature.tuner.impl.ui.engine.analyzer
 import ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
 import ru.muztache.feature.tuner.api.domain.entity.tuning.Tuning
 import ru.muztache.feature.tuner.api.domain.entity.tuning.forEachTone
-import ru.muztache.feature.tuner.impl.ui.entity.math.Deviation
-import ru.muztache.feature.tuner.impl.ui.entity.math.compareTo
+import ru.muztache.feature.tuner.impl.ui.entity.Deviation
+import ru.muztache.feature.tuner.impl.ui.entity.compareTo
 
-class FrequencyAnalyzerImpl : FrequencyAnalyzer {
+internal class FrequencyAnalyzerImpl : FrequencyAnalyzer {
 
     override fun analyze(frequency: Float, tuning: Tuning): AnalyzeResult {
 
