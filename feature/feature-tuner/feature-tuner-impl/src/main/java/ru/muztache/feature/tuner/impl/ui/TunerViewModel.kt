@@ -1,14 +1,19 @@
 package ru.muztache.feature.tuner.impl.ui
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.last
+import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
 import ru.muztache.core.common.provider.ResourceProvider
+import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar
+import ru.muztache.feature.tuner.api.domain.usecase.get.GetTunedInstrumentsUseCase
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.AnalyzeResult
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.FrequencyAnalyzer
 import ru.muztache.feature.tuner.impl.ui.engine.processor.pitch.FrequencyProcessor
@@ -19,6 +24,7 @@ import ru.muztache.feature.tuner.impl.ui.mvi.State
 internal class TunerViewModel(
     private val frequencyProcessor: FrequencyProcessor,
     private val frequencyAnalyzer: FrequencyAnalyzer,
+    private val getTunedGuitarsUseCase: GetTunedInstrumentsUseCase<Guitar>,
     resourceProvider: ResourceProvider
 ) : BaseViewModel<State, Event>(resourceProvider) {
 
@@ -38,16 +44,34 @@ internal class TunerViewModel(
         when (event) {
             is Event.StringSelect -> onStringSelect(event.stringNumber)
             is Event.AutoDetectSwitch -> onAutodetectSwitch()
+            is Event.ScreenEntered -> onScreenEntered()
+            is Event.ScreenExited -> onScreenExited()
+            is Event.Load -> onLoad()
         }
     }
 
-    fun onScreenVisible() {
+    private fun onScreenEntered() {
         viewModelScope.launch(Dispatchers.Default) {
             frequencyProcessor.start()
         }
     }
 
-    fun onScreenInvisible() {
+    private fun onLoad() {
+        viewModelScope.launch {
+            doSafeCall(::onGetGuitarsException) {
+                Log.d("ERROR", "started")
+                val guitars = getTunedGuitarsUseCase().lastOrNull()
+                Log.d("ERROR", guitars.toString())
+                //_state.emit(_state.value.copy(selectedInstrument = guitars["Standard"]!!))
+            }
+        }
+    }
+
+    private suspend fun onGetGuitarsException(ex: Exception) {
+        Log.d("ERROR", ex.toString())
+    }
+
+    private fun onScreenExited() {
         viewModelScope.launch(Dispatchers.Default) {
             frequencyProcessor.stop()
         }

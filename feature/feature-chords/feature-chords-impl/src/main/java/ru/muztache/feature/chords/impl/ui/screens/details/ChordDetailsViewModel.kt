@@ -1,6 +1,5 @@
 package ru.muztache.feature.chords.impl.ui.screens.details
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

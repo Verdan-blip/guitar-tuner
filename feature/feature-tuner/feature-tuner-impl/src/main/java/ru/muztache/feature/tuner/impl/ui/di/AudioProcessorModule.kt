@@ -8,9 +8,11 @@ import ru.muztache.feature.tuner.impl.ui.engine.processor.config.AudioProcessing
 
 internal val audioProcessorModule = module {
     single {
-        AudioDispatcherFactory.fromDefaultMicrophone(
-            AudioProcessingConfig.SAMPLE_RATE, AudioProcessingConfig.BUFFER_SIZE, 0
-        )
+        {
+            AudioDispatcherFactory.fromDefaultMicrophone(
+                AudioProcessingConfig.SAMPLE_RATE, AudioProcessingConfig.BUFFER_SIZE, 0
+            )
+        }
     }
     single<AudioProcessor> { AudioProcessorImpl(get(), get()) }
 }

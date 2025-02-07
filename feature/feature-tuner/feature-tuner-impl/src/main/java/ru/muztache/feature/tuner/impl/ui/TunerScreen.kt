@@ -3,17 +3,15 @@ package ru.muztache.feature.tuner.impl.ui
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import org.koin.androidx.compose.koinViewModel
+import ru.muztache.core.common.compose.LifecycleEventListener
 import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar
 import ru.muztache.feature.tuner.api.domain.entity.tone.Tone
@@ -44,17 +42,20 @@ fun TunerScreen(modifier: Modifier = Modifier) {
         action = action.value
     )
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_START -> viewModel.onScreenVisible()
-                Lifecycle.Event.ON_STOP -> viewModel.onScreenInvisible()
-                else -> Unit
+    LaunchedEffect(Unit) {
+        viewModel.reducer(Event.Load)
+    }
+
+    LifecycleEventListener { event ->
+        when (event) {
+            Lifecycle.Event.ON_START -> {
+                viewModel.reducer(Event.ScreenEntered)
             }
+            Lifecycle.Event.ON_STOP -> {
+                viewModel.reducer(Event.ScreenExited)
+            }
+            else -> Unit
         }
-        lifecycleOwner.lifecycle.addObserver(observer)
-        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
 }
 

@@ -13,12 +13,14 @@ import ru.muztache.feature.tuner.impl.ui.engine.processor.config.AudioProcessing
 typealias TarsosAudioDispatcher = AudioDispatcher
 
 class AudioProcessorImpl(
-    private val audioDispatcher: TarsosAudioDispatcher,
+    private val audioDispatcherFactory: () -> TarsosAudioDispatcher,
     private val applicationScope: CoroutineScope
 ) : AudioProcessor() {
 
     private val _frequency = MutableSharedFlow<AudioProcessedData>()
     override val frequency: SharedFlow<AudioProcessedData> get() = _frequency
+
+    private var audioDispatcher: AudioDispatcher? = null
 
     private val pitchDetectionHandler = PitchDetectionHandler { result, event ->
         applicationScope.launch(Dispatchers.Default) {
@@ -39,15 +41,15 @@ class AudioProcessorImpl(
         pitchDetectionHandler
     )
 
-    init {
-        audioDispatcher.addAudioProcessor(pitchProcessor)
-    }
-
     override suspend fun start() {
-        audioDispatcher.run()
+        audioDispatcher = audioDispatcherFactory()
+        audioDispatcher?.addAudioProcessor(pitchProcessor)
+        audioDispatcher?.run()
     }
 
     override suspend fun stop() {
-        audioDispatcher.stop()
+        audioDispatcher?.stop()
+        audioDispatcher?.removeAudioProcessor(pitchProcessor)
+        audioDispatcher = null
     }
 }
