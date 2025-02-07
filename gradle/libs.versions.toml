@@ -39,6 +39,7 @@ google-services = "4.4.2"
 firebase-bom = "33.8.0"
 firebase-crashlytics = "3.0.2"
 sqldelight = "2.0.2"
+mockk = "1.13.16"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -100,6 +101,8 @@ sqldelight = { group = "app.cash.sqldelight", name = "android-driver", version.r
 
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
 androidx-animation-graphics-android = { group = "androidx.compose.animation", name = "animation-graphics-android", version.ref = "animationGraphicsAndroid" }
+
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

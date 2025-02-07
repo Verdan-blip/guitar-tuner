@@ -6,10 +6,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
-import ru.muztache.core.common.entity.TextFieldState
 import ru.muztache.core.common.provider.ResourceProvider
 import ru.muztache.core.data.local.user.exceptions.AuthException
-import ru.muztache.feature.profile.domain.usecase.ChangeUserNameUseCase
 import ru.muztache.feature.profile.domain.usecase.GetUserProfileUseCase
 import ru.muztache.feature.profile.ui.entity.AuthResult
 import ru.muztache.feature.profile.ui.entity.UserProfileModel
@@ -20,8 +18,7 @@ import ru.muztache.feature.profile.ui.route.ProfileRoute
 
 internal class ProfileViewModel(
     private val getUserProfileUseCase: GetUserProfileUseCase,
-    private val changeUserNameUseCase: ChangeUserNameUseCase,
-    resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider
 ) : BaseViewModel<State, Event>(resourceProvider) {
 
     private val _state = MutableStateFlow(State())
@@ -34,8 +31,6 @@ internal class ProfileViewModel(
             is Event.Load -> onLoad()
             is Event.SignInClick -> onSignInClick()
             is Event.SignUpClick -> onSignUpClick()
-            is Event.NameChange -> onNameChange(event.name)
-            is Event.NameSubmit -> onNameChangeSubmit()
         }
     }
 
@@ -51,33 +46,11 @@ internal class ProfileViewModel(
         }
     }
 
-    private fun onNameChange(name: String) {
-        viewModelScope.launch {
-            userProfileScreenshot?.also { profile ->
-                val changed = profile.copy(name = TextFieldState.Idle(name))
-                _state.emit(_state.value.copy(
-                    authResult = AuthResult.Authorized(userProfile = changed)
-                ))
-                userProfileScreenshot = changed
-            }
-        }
-    }
-
-    private fun onNameChangeSubmit() {
-        viewModelScope.launch {
-            doSafeCall {
-                userProfileScreenshot?.also { profile ->
-                    changeUserNameUseCase(profile.name.value)
-                }
-            }
-        }
-    }
-
     private fun onLoad() {
         viewModelScope.launch {
             doSafeCall(onException = ::onLoadException) {
                 _state.emit(_state.value.copy(authResult = AuthResult.Pending))
-                val userProfile = getUserProfileUseCase().toUserProfileModel()
+                val userProfile = getUserProfileUseCase().toUserProfileModel(resourceProvider)
                 _state.emit(_state.value.copy(authResult = AuthResult.Authorized(userProfile)))
                 userProfileScreenshot = userProfile
             }

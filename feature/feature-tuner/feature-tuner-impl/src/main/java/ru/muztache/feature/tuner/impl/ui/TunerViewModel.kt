@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
@@ -67,7 +66,7 @@ internal class TunerViewModel(
         }
     }
 
-    private suspend fun onGetGuitarsException(ex: Exception) {
+    private fun onGetGuitarsException(ex: Exception) {
         Log.d("ERROR", ex.toString())
     }
 

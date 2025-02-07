@@ -9,8 +9,4 @@ internal sealed interface Event : BaseEvent {
     data object SignUpClick : Event
 
     data object SignInClick : Event
-
-    data class NameChange(val name: String) : Event
-
-    data object NameSubmit : Event
 }
