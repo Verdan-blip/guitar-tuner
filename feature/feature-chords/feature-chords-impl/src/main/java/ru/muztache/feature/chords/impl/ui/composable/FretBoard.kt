@@ -27,13 +27,13 @@ private const val STRING_COUNT = 6
 private const val FRET_COUNT = 4
 private const val MAX_FRET_DIST = 4
 
-private val size = DpSize(128.dp, 112.dp)
+private val size = DpSize(128.dp, 144.dp)
 private val leftSpaceSize = DpSize(32.dp, 0.dp)
 private val topSpaceSize = DpSize(0.dp, 20.dp)
 private val bottomSpaceSize = DpSize(0.dp, 20.dp)
-private val signSize = DpSize(12.dp, 12.dp)
-private val fontSize = 8.sp
-private val barreFontSize = 12.sp
+private val signSize = DpSize(18.dp, 18.dp)
+private val fontSize = 12.sp
+private val barreFontSize = 16.sp
 private val strokeWidth: Dp = 1.dp
 private val barreStrokeWidth: Dp = 4.dp
 

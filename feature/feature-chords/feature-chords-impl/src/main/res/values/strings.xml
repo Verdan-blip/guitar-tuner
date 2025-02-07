@@ -2,4 +2,5 @@
 <resources>
     <string name="title_chords_library">Библиотека аккордов</string>
     <string name="basic_chords">Базовые аккорды</string>
+    <string name="advanced_chords">Продвинутые аккорды</string>
 </resources>

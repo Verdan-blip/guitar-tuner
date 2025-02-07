@@ -28,7 +28,7 @@ fun MuztacheTextTab(
     ) {
         Text(
             text = text,
-            style = MuztacheTheme.typography.titleMedium,
+            style = MuztacheTheme.typography.titleLarge,
             color = if (selected)
                 MuztacheTheme.colors.textPrimary
             else

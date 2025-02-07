@@ -1,7 +1,9 @@
 package ru.muztache.feature.tuner.impl.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
@@ -65,9 +67,11 @@ private fun TunerScreenContent(
 ) {
     val tuningIndicatorState = rememberProgressIndicatorState()
 
-    Box(
-        modifier = modifier
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val headstockState = rememberHeadstockState()
         PitchPanel(
             tuningIndicatorState = tuningIndicatorState,
             currentFrequency = state.currentFrequency,
@@ -76,16 +80,20 @@ private fun TunerScreenContent(
             isAutoDetect = state.isAutoDetect,
             onAutoDetectSwitch = { onEvent(Event.AutoDetectSwitch) }
         )
-        GuitarHeadstock(
+        Box(
             modifier = Modifier
-                .align(Alignment.Center),
-            tuning = state.selectedInstrument.tuning,
-            headstockState = rememberHeadstockState(),
-            onStringSelect = { stringNum ->
-                onEvent(Event.StringSelect(stringNum))
-            }
-        )
-
+                .fillMaxSize()
+        ) {
+            GuitarHeadstock(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                tuning = state.selectedInstrument.tuning,
+                headstockState = headstockState,
+                onStringSelect = { stringNum ->
+                    onEvent(Event.StringSelect(stringNum))
+                }
+            )
+        }
         when (action) {
             is Action.OnNewDeviation -> {
                 tuningIndicatorState.changeDeviationAnimation(

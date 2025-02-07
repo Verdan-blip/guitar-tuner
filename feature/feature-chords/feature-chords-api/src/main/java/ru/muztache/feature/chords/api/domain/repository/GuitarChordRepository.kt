@@ -7,4 +7,6 @@ interface GuitarChordRepository {
     suspend fun saveChords(chords: List<Chord>)
 
     suspend fun getBasicChords(): List<Chord>
+
+    suspend fun getAdvancedChords(): List<Chord>
 }

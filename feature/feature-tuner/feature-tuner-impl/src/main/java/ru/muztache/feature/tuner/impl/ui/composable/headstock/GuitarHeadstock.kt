@@ -53,7 +53,6 @@ private val sillHeightDp: Dp = 12.dp
 private val guitarNeckDpSize: DpSize = DpSize(96.dp, 96.dp)
 
 private val stringWidthDp: Dp = 2.dp
-private val stringPaddingHorizontalDp: Dp = 8.dp
 
 data class GuitarColors(
     val woodColor: Color,
@@ -124,10 +123,9 @@ fun GuitarHeadstock(
         )
     }
 
-    val selectedString = headstockState.selectedString.value
+    val selectedString = headstockState.selectedString.intValue
 
     val textMeasurer = rememberTextMeasurer()
-
     Canvas(
         modifier = Modifier
             .requiredWidth(

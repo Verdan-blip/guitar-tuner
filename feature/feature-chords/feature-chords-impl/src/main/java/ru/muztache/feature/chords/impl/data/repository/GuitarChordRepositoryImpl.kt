@@ -18,8 +18,13 @@ class GuitarChordRepositoryImpl(
         return dataSource.getByNames(BASIC_CHORD_NAMES).toChordList()
     }
 
+    override suspend fun getAdvancedChords(): List<Chord> {
+        return dataSource.getByNames(ADVANCED_CHORD_NAMES).toChordList()
+    }
+
     companion object {
 
         val BASIC_CHORD_NAMES = listOf("Am", "A", "Dm", "D", "C", "F", "G", "Em", "E")
+        val ADVANCED_CHORD_NAMES = listOf("Cm", "C#m", "G#", "G#m", "Gm", "F#", "F#m", "B", "Bm", "A#", "A#m")
     }
 }

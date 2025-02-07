@@ -1,6 +1,9 @@
+import ru.muztache.conventionplugins.base.extensions.implementation
+
 plugins {
     id("base.feature.dependencies")
     id("base.feature.config")
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -14,4 +17,5 @@ android {
 
 dependencies {
     implementation(project(":feature:feature-chords:feature-chords-api"))
+    implementation(libs.kotlin.serialization.json)
 }

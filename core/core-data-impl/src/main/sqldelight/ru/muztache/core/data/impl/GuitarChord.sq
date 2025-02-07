@@ -1,7 +1,8 @@
 CREATE TABLE GuitarChord(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    frets TEXT NOT NULL
+    frets TEXT NOT NULL,
+    UNIQUE (name, frets) ON CONFLICT ABORT
 );
 
 selectAll:
@@ -11,6 +12,6 @@ SELECT * FROM GuitarChord WHERE name = ?;
 selectByNames:
 SELECT * FROM GuitarChord WHERE name IN ?;
 insert:
-INSERT OR REPLACE INTO GuitarChord(name, frets) VALUES (?, ?);
+INSERT OR IGNORE INTO GuitarChord(name, frets) VALUES (?, ?);
 deleteById:
 DELETE FROM GuitarChord WHERE id = ?;
