@@ -29,7 +29,6 @@ import ru.muztache.feature.profile.ui.entity.UserProfileModel
 @Composable
 internal fun AuthorizedScreen(
     userProfileEntity: UserProfileModel,
-    onSubmitChangedName: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -108,7 +107,6 @@ private fun AuthorizedScreenPreview() {
                     name = "Пользователь",
                     photoUri = "String"
                 ),
-                onSubmitChangedName = { },
                 modifier = Modifier
                     .fillMaxSize()
             )

@@ -42,7 +42,7 @@ fun FretBoard(
     chord: ChordModel,
     modifier: Modifier = Modifier
 ) {
-    if (chord.frets.size != 6) {
+    if (chord.frets.size != STRING_COUNT) {
         error("Incorrect frets size")
     }
     val textMeasurer = rememberTextMeasurer()

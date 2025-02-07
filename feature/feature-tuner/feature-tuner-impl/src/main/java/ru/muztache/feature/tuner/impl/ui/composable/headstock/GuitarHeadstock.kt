@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package ru.muztache.feature.tuner.impl.ui.composable.headstock
 
 import androidx.compose.foundation.Canvas
@@ -33,6 +34,8 @@ import ru.muztache.core.common.compose.layoutPositionsFromCenter
 import ru.muztache.core.common.compose.onIntersect
 import ru.muztache.feature.tuner.api.domain.entity.tone.ToneWithOctave
 import ru.muztache.feature.tuner.api.domain.entity.tuning.Tuning
+
+private const val STRING_COUNT = 6
 
 private val headstockDpSize: DpSize = DpSize(156.dp, 256.dp)
 
@@ -200,7 +203,7 @@ fun GuitarHeadstock(
         )
 
         val stringWidth = stringWidthDp.toPx()
-        val paddingBetweenStrings = guitarNeckSize.width / 7
+        val paddingBetweenStrings = guitarNeckSize.width / (STRING_COUNT + 1)
 
         pegHolePositions.forEachIndexed { index, holePosition ->
             val sillIntersectionPos = Offset(

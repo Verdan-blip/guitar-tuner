@@ -24,12 +24,12 @@ internal data class State(
         fun create(): State {
             val instrument = Guitar(
                 GuitarTuning(
-                    string1 = ToneWithOctave(Tone.E, 4),
-                    string2 = ToneWithOctave(Tone.E, 4),
-                    string3 = ToneWithOctave(Tone.E, 4),
-                    string4 = ToneWithOctave(Tone.E, 4),
-                    string5 = ToneWithOctave(Tone.E, 4),
-                    string6 = ToneWithOctave(Tone.E, 4),
+                    string1 = ToneWithOctave(Tone.E, 1),
+                    string2 = ToneWithOctave(Tone.E, 1),
+                    string3 = ToneWithOctave(Tone.E, 1),
+                    string4 = ToneWithOctave(Tone.E, 1),
+                    string5 = ToneWithOctave(Tone.E, 1),
+                    string6 = ToneWithOctave(Tone.E, 1),
                 )
             )
             val currentString = 0

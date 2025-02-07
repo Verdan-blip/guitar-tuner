@@ -10,12 +10,17 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.android")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 androidConfig {
     buildFeatures {
         compose = true
     }
+}
+
+detekt {
+    config.from(files("${rootDir}/config/detekt/detekt.yml"))
 }
 
 dependencies {

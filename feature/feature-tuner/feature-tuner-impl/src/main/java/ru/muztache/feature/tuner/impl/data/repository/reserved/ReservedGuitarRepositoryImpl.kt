@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package ru.muztache.feature.tuner.impl.data.repository.reserved
 
 import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar

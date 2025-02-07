@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package ru.muztache.feature.profile.ui.composable
 
 import androidx.compose.foundation.Image
@@ -7,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import ru.muztache.core.theme.MuztacheTheme
 import ru.muztache.core.theme.composable.button.MuztacheTextButton
@@ -33,13 +34,16 @@ internal fun UnauthorizedScreen(
     Box(
         modifier = modifier
     ) {
+        val imageOffsetX = (-120).dp
+        val imageOffsetY = 64.dp
+        val imageRotation = -30f
         Image(
             painter = painterResource(R.drawable.guitar),
             contentDescription = null,
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .offset((-120).dp, (64).dp)
-                .rotate(-30f)
+                .offset(imageOffsetX, imageOffsetY)
+                .rotate(degrees = imageRotation)
         )
         Column(
             modifier = Modifier
@@ -72,7 +76,7 @@ internal fun UnauthorizedScreen(
                     text = stringResource(R.string.register),
                     onClick = onSignUpClick,
                     modifier = Modifier
-                        .weight(0.5f)
+                        .weight(1f)
                 )
                 Text(
                     text = stringResource(R.string.login),
@@ -81,7 +85,7 @@ internal fun UnauthorizedScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
-                        .weight(0.5f)
+                        .weight(1f)
                         .clickable {
                             onSignInClick()
                         }
@@ -93,7 +97,7 @@ internal fun UnauthorizedScreen(
 
 @Preview(showSystemUi = true)
 @Composable
-private fun UnauthorizedScreenPrevoew() {
+private fun UnauthorizedScreenPreview() {
     UnauthorizedScreen(
         onSignInClick = { },
         onSignUpClick = {  },

@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package ru.muztache.core.theme.colors
 
 import androidx.compose.runtime.staticCompositionLocalOf

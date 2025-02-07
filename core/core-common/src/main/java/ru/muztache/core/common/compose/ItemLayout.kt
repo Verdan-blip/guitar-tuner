@@ -1,3 +1,4 @@
+@file:Suppress("MagicNumber")
 package ru.muztache.core.common.compose
 
 import androidx.compose.ui.geometry.Offset

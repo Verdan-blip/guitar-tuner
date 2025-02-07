@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.serailization) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.detekt) apply false
     id("base.common.config") apply false
     id("base.common.dependencies") apply false
     id("base.feature.config") apply false

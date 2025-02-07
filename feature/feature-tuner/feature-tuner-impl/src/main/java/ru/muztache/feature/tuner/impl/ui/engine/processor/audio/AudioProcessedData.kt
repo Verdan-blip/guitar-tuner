@@ -7,3 +7,4 @@ class AudioProcessedData(
     val probability: Float,
     val dBSPL: Double
 )
+

@@ -12,6 +12,7 @@ dependencies {
     implementation(libs.gradleplugin.compose)
     implementation(libs.gradleplugin.composeCompiler)
     implementation(libs.gradleplugin.kotlin)
+    implementation(libs.detekt.gradle.plugin)
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 

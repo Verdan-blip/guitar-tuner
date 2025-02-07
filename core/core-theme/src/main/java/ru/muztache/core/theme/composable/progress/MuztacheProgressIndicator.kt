@@ -34,7 +34,11 @@ fun MuztacheProgressIndicator(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = tween(1000, 100, EaseInOut),
+            animation = tween(
+                durationMillis = 1000,
+                delayMillis = 100,
+                easing = EaseInOut
+            ),
             repeatMode = RepeatMode.Restart
         ),
         label = "pickRotation"

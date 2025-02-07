@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.sqldelight)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -43,6 +44,10 @@ android {
     buildFeatures {
         compose = true
     }
+}
+
+detekt {
+    config.from(files("${rootDir}/config/detekt/detekt.yml"))
 }
 
 dependencies {

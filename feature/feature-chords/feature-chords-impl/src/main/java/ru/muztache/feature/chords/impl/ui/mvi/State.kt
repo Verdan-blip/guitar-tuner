@@ -6,3 +6,4 @@ import ru.muztache.core.common.entity.FetchRequest
 internal data class State(
     val baseChords: FetchRequest = FetchRequest.Pending
 ) : BaseState
+

@@ -23,7 +23,7 @@ fun ProgressIndicatorLayout(
         content = content
     ) { measurables, constraints ->
 
-        val normalizedProgress = state.progress.value + 0.5f
+        val normalizedProgress = state.progress.value + 1f / 2
         var minHeight = 0
 
         val placeables = measurables.map { measurable ->
