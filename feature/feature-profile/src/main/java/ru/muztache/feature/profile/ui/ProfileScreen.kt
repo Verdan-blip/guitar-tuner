@@ -89,7 +89,6 @@ private fun ProfileScreenContent(
         is AuthResult.Authorized -> {
             AuthorizedScreen(
                 userProfileEntity = state.authResult.userProfile,
-                onSubmitChangedName = { },
                 modifier = modifier
             )
         }
