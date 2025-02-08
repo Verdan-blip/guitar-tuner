@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="auto_detect">Определять автоматически</string>
+    <string name="failed_to_fetch_guitars">Не удалось получить данные о текущих гитарах</string>
+    <string name="your_guitar_tunings">Ваши гитарные строи</string>
 </resources>
