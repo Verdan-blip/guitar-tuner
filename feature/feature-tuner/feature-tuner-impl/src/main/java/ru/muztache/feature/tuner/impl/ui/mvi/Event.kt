@@ -10,6 +10,8 @@ internal sealed interface Event : BaseEvent {
 
     data object Load : Event
 
+    data class SelectInstrument(val key: String) : Event
+
     data object ScreenEntered: Event
 
     data object ScreenExited : Event

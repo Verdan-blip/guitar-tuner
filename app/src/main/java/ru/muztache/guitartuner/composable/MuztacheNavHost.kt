@@ -33,7 +33,12 @@ fun MuztacheNavHost(
         composable<Route.Splash> {
             SplashScreen(
                 onNavigateToHomeScreen = {
-                    navController.navigate(Route.BottomNavigationRoute)
+                    navController.navigate(Route.BottomNavigationRoute) {
+                        popUpTo<Route.Splash> {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 },
                 modifier = Modifier
                     .fillMaxSize()
@@ -42,10 +47,17 @@ fun MuztacheNavHost(
         composable<Route.SignIn> {
             SignInScreen(
                 onNavigateToProfile = {
-                    navController.navigate(Route.BottomNavigationRoute)
+                    navController.navigate(Route.BottomNavigationRoute) {
+                        popUpTo<Route.SignIn> {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToSignUp = {
-                    navController.navigate(Route.SignUp)
+                    navController.navigate(Route.SignUp) {
+                        launchSingleTop = true
+                    }
                 },
                 modifier = Modifier
                     .fillMaxSize()
@@ -54,10 +66,17 @@ fun MuztacheNavHost(
         composable<Route.SignUp> {
             SignUpScreen(
                 onNavigateToProfile = {
-                    navController.navigate(Route.BottomNavigationRoute)
+                    navController.navigate(Route.BottomNavigationRoute) {
+                        popUpTo<Route.SignUp> {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 },
                 onNavigateToSignIn = {
-                    navController.navigate(Route.SignIn)
+                    navController.navigate(Route.SignIn) {
+                        launchSingleTop = true
+                    }
                 },
                 modifier = Modifier
                     .fillMaxSize()

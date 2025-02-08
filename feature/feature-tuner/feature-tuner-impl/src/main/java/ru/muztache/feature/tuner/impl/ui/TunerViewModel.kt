@@ -7,12 +7,15 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.lastOrNull
 import kotlinx.coroutines.launch
+import ru.muztache.core.common.base.mvi.BaseEffect
 import ru.muztache.core.common.base.viewmodel.BaseViewModel
+import ru.muztache.core.common.entity.FetchRequest
 import ru.muztache.core.common.provider.ResourceProvider
 import ru.muztache.feature.tuner.api.domain.entity.instrument.Guitar
+import ru.muztache.feature.tuner.api.domain.entity.instrument.StringInstrument
 import ru.muztache.feature.tuner.api.domain.usecase.get.GetTunedInstrumentsUseCase
+import ru.muztache.feature.tuner.impl.R
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.AnalyzeResult
 import ru.muztache.feature.tuner.impl.ui.engine.analyzer.FrequencyAnalyzer
 import ru.muztache.feature.tuner.impl.ui.engine.processor.pitch.FrequencyProcessor
@@ -27,17 +30,13 @@ internal class TunerViewModel(
     resourceProvider: ResourceProvider
 ) : BaseViewModel<State, Event>(resourceProvider) {
 
-    private val _state = MutableStateFlow(State.create())
+    private val _state = MutableStateFlow(State())
     override val state: StateFlow<State> get() = _state
 
     private val _action = MutableSharedFlow<Action>()
     val action: SharedFlow<Action> get() = _action
 
-    init {
-        viewModelScope.launch(Dispatchers.Default) {
-            collectPitches()
-        }
-    }
+    private var currentInstrument: StringInstrument<*>? = null
 
     override fun reducer(event: Event) {
         when (event) {
@@ -46,6 +45,7 @@ internal class TunerViewModel(
             is Event.ScreenEntered -> onScreenEntered()
             is Event.ScreenExited -> onScreenExited()
             is Event.Load -> onLoad()
+            is Event.SelectInstrument -> onInstrumentSelect(event.key)
         }
     }
 
@@ -57,17 +57,9 @@ internal class TunerViewModel(
 
     private fun onLoad() {
         viewModelScope.launch {
-            doSafeCall(::onGetGuitarsException) {
-                Log.d("ERROR", "started")
-                val guitars = getTunedGuitarsUseCase().lastOrNull()
-                Log.d("ERROR", guitars.toString())
-                //_state.emit(_state.value.copy(selectedInstrument = guitars["Standard"]!!))
-            }
+            launch { collectPitches() }
+            launch { collectGuitarTuningChanges() }
         }
-    }
-
-    private fun onGetGuitarsException(ex: Exception) {
-        Log.d("ERROR", ex.toString())
     }
 
     private fun onScreenExited() {
@@ -77,11 +69,19 @@ internal class TunerViewModel(
     }
 
     private fun onStringSelect(stringNumber: Int) {
-        val instrument = _state.value.selectedInstrument
-        _state.value = _state.value.copy(
-            selectedString = stringNumber,
-            idolNote = instrument.getToneWithOctave(stringNumber)
-        )
+        currentInstrument?.also { instrument ->
+            Log.d("ERROR", instrument.getToneWithOctave(stringNumber).frequency.toString())
+            _state.value = _state.value.copy(
+                selectedString = stringNumber,
+                idolNote = instrument.getToneWithOctave(stringNumber)
+            )
+        }
+    }
+
+    private fun onInstrumentSelect(key: String) {
+        viewModelScope.launch {
+            _state.emit(_state.value.copy(selectedKey = FetchRequest.Success(key)))
+        }
     }
 
     private fun onAutodetectSwitch() {
@@ -90,25 +90,50 @@ internal class TunerViewModel(
         )
     }
 
+    private suspend fun collectGuitarTuningChanges() {
+        doSafeCall(onException = { onGetGuitarsException() }) {
+            getTunedGuitarsUseCase().collect { guitars ->
+                val selectedKey = guitars.keys.first()
+                guitars[selectedKey]?.also { guitar ->
+                    _state.emit(_state.value.copy(
+                        savedTunings = guitars,
+                        selectedKey = FetchRequest.Success(selectedKey)
+                    ))
+                    currentInstrument = guitar
+                }
+            }
+        }
+    }
+
+    private suspend fun onGetGuitarsException() {
+        emitBaseEffect(
+            BaseEffect.ShowSnackBar(getProvidedString(R.string.failed_to_fetch_guitars))
+        )
+    }
+
     private suspend fun collectPitches() {
         frequencyProcessor.frequency.collect { frequency ->
-            val selectedString = _state.value.selectedString
-            val toneForString = _state.value.selectedInstrument.getToneWithOctave(selectedString)
-            val analyzeResult = if (_state.value.isAutoDetect) {
-                frequencyAnalyzer.analyze(frequency, _state.value.selectedInstrument.tuning)
-            } else {
-                frequencyAnalyzer.analyzeComparing(frequency, toneForString)
-            }
-            when (analyzeResult) {
-                is AnalyzeResult.Success -> {
-                    _action.emit(Action.OnNewDeviation(deviation = analyzeResult.deviation))
-                    _state.emit(_state.value.copy(
-                        isTuned = analyzeResult.isTuned,
-                        currentFrequency = analyzeResult.frequency,
-                        idolNote = analyzeResult.nearestTone
-                    ))
+            _state.value.apply {
+                currentInstrument?.also { instrument ->
+                    val selectedString = selectedString
+                    val toneForString = instrument.getToneWithOctave(selectedString)
+                    val analyzeResult = if (isAutoDetect) {
+                        frequencyAnalyzer.analyze(frequency, instrument.tuning)
+                    } else {
+                        frequencyAnalyzer.analyzeComparing(frequency, toneForString)
+                    }
+                    when (analyzeResult) {
+                        is AnalyzeResult.Success -> {
+                            _action.emit(Action.OnNewDeviation(deviation = analyzeResult.deviation))
+                            _state.emit(copy(
+                                isTuned = analyzeResult.isTuned,
+                                currentFrequency = analyzeResult.frequency,
+                                idolNote = analyzeResult.nearestTone
+                            ))
+                        }
+                        is AnalyzeResult.Failure -> {  }
+                    }
                 }
-                is AnalyzeResult.Failure -> {  }
             }
         }
     }

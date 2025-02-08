@@ -25,8 +25,8 @@ internal class TunedGuitarRepositoryImpl(
         .guitarDataSource
         .data
         .map { guitars ->
-            guitars.guitarsMap.mapValues {
-                (_, guitar) -> guitar.toGuitar()
+            guitars.guitarsMap.mapValues { (_, guitar) ->
+                guitar.toGuitar()
             }
         }
 
